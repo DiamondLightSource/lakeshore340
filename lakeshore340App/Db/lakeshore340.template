@@ -1,0 +1,128 @@
+################################################################
+#
+# Lakeshore 340 Temperature Controller template file.
+#
+# Macros:
+#   P - Prefix for PV name
+#   PORT - Bus/Port Address (eg. ASYN Port).
+#   ADDR - Address on the bus (optional)
+#   TEMPSCAN - SCAN rate for the temperature/voltage readings
+#   SCAN - SCAN rate for non-temperature/voltage parameters.
+#
+################################################################
+
+
+################################################################
+# Set records
+################################################################
+
+record(stringin, "$(P):ID") {
+  field(DTYP, "stream")
+  field(INP, "@ls340.protocol getID $(PORT) $(ADDR)")
+  field(SCAN, "$(SCAN)")
+}
+
+record(ai, "$(P):HTR") {
+  field(DTYP, "stream")
+  field(INP, "@ls340.protocol getHTR $(PORT) $(ADDR)")
+  field(SCAN, "$(SCAN)")
+}
+
+record(ai, "$(P):SETP") {
+  field(DTYP, "stream")
+  field(INP, "@ls340.protocol getSETP $(PORT) $(ADDR)")
+  field(SCAN, "$(SCAN)")
+}
+
+record(ai, "$(P):KRDG0") {
+  field(DTYP, "stream")
+  field(INP, "@ls340.protocol getKRDG(0) $(PORT) $(ADDR)")
+  field(SCAN, "$(TEMPSCAN)")
+}
+
+record(ai, "$(P):KRDG1") {
+  field(DTYP, "stream")
+  field(INP, "@ls340.protocol getKRDG(1) $(PORT) $(ADDR)")
+  field(SCAN, "$(TEMPSCAN)")
+}
+
+record(ai, "$(P):KRDG2") {
+  field(DTYP, "stream")
+  field(INP, "@ls340.protocol getKRDG(2) $(PORT) $(ADDR)")
+  field(SCAN, "$(TEMPSCAN)")
+}
+
+record(ai, "$(P):KRDG3") {
+  field(DTYP, "stream")
+  field(INP, "@ls340.protocol getKRDG(3) $(PORT) $(ADDR)")
+  field(SCAN, "$(TEMPSCAN)")
+}
+
+record(ai, "$(P):SRDG0") {
+  field(DTYP, "stream")
+  field(INP, "@ls340.protocol getSRDG(0) $(PORT) $(ADDR)")
+field(SCAN, "$(TEMPSCAN)")
+}
+
+record(ai, "$(P):SRDG1") {
+  field(DTYP, "stream")
+  field(INP, "@ls340.protocol getSRDG(1) $(PORT) $(ADDR)")
+  field(SCAN, "$(TEMPSCAN)")
+}
+
+record(ai, "$(P):SRDG2") {
+  field(DTYP, "stream")
+  field(INP, "@ls340.protocol getSRDG(2) $(PORT) $(ADDR)")
+  field(SCAN, "$(TEMPSCAN)")
+}
+
+record(ai, "$(P):SRDG3") {
+  field(DTYP, "stream")
+  field(INP, "@ls340.protocol getSRDG(3) $(PORT) $(ADDR)")
+  field(SCAN, "$(TEMPSCAN)")
+}
+
+record(ai, "$(P):RANGE") {
+  field(DTYP, "stream")
+  field(INP, "@ls340.protocol getRANGE $(PORT) $(ADDR)")
+  field(SCAN, "$(SCAN)")
+}
+
+record(ai, "$(P):RAMP") {
+  field(DTYP, "stream")
+  field(INP, "@ls340.protocol getRAMP $(PORT) $(ADDR)")
+  field(SCAN, "$(SCAN)")
+}
+
+record(ai, "$(P):RAMPST") {
+  field(DTYP, "stream")
+  field(INP, "@ls340.protocol getRAMPSTATUS $(PORT) $(ADDR)")
+  field(SCAN, "$(SCAN)")
+}
+
+################################################################
+# Set records
+################################################################
+
+
+record(ao, "$(P):SETP_S") {
+  field(DTYP, "stream")
+  field(OUT, "@ls340.protocol setSETP $(PORT) $(ADDR)")
+}
+
+record(ao, "$(P):RANGE_S") {
+  field(DTYP, "stream")
+  field(OUT, "@ls340.protocol setRANGE $(PORT) $(ADDR)")
+}
+
+#Pass in the $(P):RAMPST into the protocol function
+record(ao, "$(P):RAMP_S") {
+  field(DTYP, "stream")
+  field(OUT, "@ls340.protocol setRAMP($(P):RAMPST) $(PORT) $(ADDR)")
+}
+
+#Pass in the $(P):RAMP into the protocol function
+record(ao, "$(P):RAMPST_S") {
+  field(DTYP, "stream")
+  field(OUT, "@ls340.protocol setRAMPSTATUS($(P):RAMP) $(PORT) $(ADDR)")
+}

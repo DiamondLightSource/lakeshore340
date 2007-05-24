@@ -17,6 +17,14 @@ TEMPLATE_TOP=$(EPICS_BASE)/templates/makeBaseApp/top
 #If using the sequencer, uncomment this line:
 #SNCSEQ=/home/diamond/R3.14.7/prod/support/seq/2-0-10
 
+#Support Area
+SUPPORT=/dls_sw/prod/R3.14.8.2/support
+
+#Support Modules
+ASYN=$(SUPPORT)/asyn/4-8
+#STREAM=$(SUPPORT)/streamDevice/2-2
+STREAM=/home/pnd56/epics/R3.14.8.2/streamDevice/
+
 # EPICS_BASE usually appears last so other apps can override stuff:
 EPICS_BASE=/dls_sw/epics/R3.14.8.2/base
 
