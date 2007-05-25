@@ -1,0 +1,45 @@
+/**
+\mainpage Lakeshore 340 EPICS Support Module
+\section intro_sec Introduction
+25 May 2007
+
+The lakeshore340 support module provides an EPICS interface to the Lakeshore
+340 Temperature Controller.
+
+\subsection use_sec How to use this support module within an IOC application.
+
+<ol>
+<li> Add a macro that points to the module in configure/RELEASE. e.g. 
+\verbatim
+    LAKESHORE340 = /home/mp49/epics/support/lakeshore340
+\endverbatim
+
+<li> Add the module DBD file to the list of DBD. e.g. in src/Makefile\n
+\verbatim
+
+    BL16I-EA-IOC-01_DBD += lakeshore340.dbd
+
+Note that the module requires the following DBD files in addition to EPICS_BASE
+	asyn.dbd
+	stream.dbd
+	drvAsynSerialPort.dbd
+\endverbatim
+</ol>
+
+**/
+
+/**
+\page build_sec Build Instructions
+
+The support module contains the following elements
+
+- lakeshore340App\n
+  The actual EPICS support module to be used by an IOC application.\n
+  Build this module by simply running "make install"
+  
+
+- example\n
+  An EPICS IOC application that using this lakeshore340App\n
+  Build this module by simply running "make install"
+
+**/

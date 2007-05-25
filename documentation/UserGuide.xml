@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+  "/usr/share/sgml/docbook/xml-dtd-4.3-1.0-25/docbookx.dtd">
+ 
+<article>
+
+  <articleinfo>
+    <title>EPICS Lakeshore 340 Support Module User Guide</title>
+    <copyright>
+      <year>2007</year>
+      <holder>Copyright 2007 Diamond Light Source Limited</holder>
+    </copyright>
+  </articleinfo>
+
+  <sect1>
+      <title>Trouble Shooting</title>
+    
+
+      <sect2>
+      <title>IO Status shows TIMEOUT - Device not responding</title>
+      <para>If the Interaface Control is in the On state but the device does not respond to the regular reading of the filter position
+      then the interface will display the value TIMEOUT in the IO Status field. The interface still behaves as normal but that the 
+      change int the desired filter position will not cause an actual change in position. The Filter field will show the value that
+      was last read successfully.</para>
+      <itemizedlist mark='opencircle'>
+      <listitem><para>Check that the device is powered on and is controllable by the front panel button</para></listitem>
+      <listitem><para>Check that the serial cable is connected to the device.</para></listitem>
+      <listitem><para>Try powering the device on and off.</para></listitem>
+	  </itemizedlist>
+	  </sect2>
+      <sect2>
+      <title>STB or ESR do not show 0</title>
+      <para>STB is the Status Byte read from the device</para>
+      <para>Response: 00 indicates no error</para>
+      <para>32 decimal ; 20 Hex / bit5 ; indicate an error condition</para>
+      <para>ESR is the value of the Event Status Register read when the STB last read 0</para>
+	  <para>80 - The 74041 has been power on reset since last read</para>
+	  <para>20 - The 74041 has received an illegal command</para>
+      <para>10 - The 74041 had a problem with the filter wheel</para>
+	  <para>Press the reset button is STB is now 0 to clear the latched value of the ESR</para>
+	  </sect2>
+      <sect2>
+      <title>Filter is shown as unkown when Interface Control is On</title>
+      <para>No valid filter erading has yet been made of the device</para>
+      <itemizedlist mark='opencircle'>
+      <listitem><para>Physically check that the filter wheel is connected to the controller.</para></listitem>
+	  </itemizedlist>
+ 	  </sect2>
+  </sect1>    
+</article>
