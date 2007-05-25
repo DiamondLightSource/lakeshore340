@@ -22,49 +22,51 @@ ReplyTimeout = 1000;
 # Get functions
 ###################################################
 
-#Read the device ID
+# /// 
+# /// Read the device ID
+# ///
 getID {
    out "*IDN?";
    in "%s";
 }
 
-#Read the heater status
+# /// Read the heater status
 getHTR {
    out "HTR?";
    in "%f";
 }
 
-#Read the setpoint for control loop 1
+# /// Read the setpoint for control loop 1
 getSETP {
    out "SETP? 1";
    in "%f";
 }
 
-#Read the temperature in kelvin
+# /// Read the temperature in kelvin
 getKRDG {
    out "KRDG? \$1";
    in "%f";
 }
 
-#Read the voltage input
+# /// Read the voltage input
 getSRDG {
    out "SRDG? \$1";
    in "%f";
 }
 
-#Read the range parameter (power range)
+# /// Read the range parameter (power range)
 getRANGE {
    out "RANGE?";
    in "%f";
 }
 
-#Read the ramp value
+# /// Read the ramp value
 getRAMP {
    out "RAMP? 1";
    in "%*d,%f";
 }
 
-#Read the ramp status
+# /// Read the ramp status
 getRAMPSTATUS {
    out "RAMP? 1";
    in "%d,%*f";
@@ -75,23 +77,23 @@ getRAMPSTATUS {
 # Set functions
 #######################################################
 
-#Set the setpoint for control loop 1
+# /// Set the setpoint for control loop 1
 setSETP {
    out "SETP 1,%f";
 }
 
-#Set the range parameter
+# /// Set the range parameter
 setRANGE {
    out "RANGE %d";
 }
 
-#Set the ramp parameter
+# /// Set the ramp parameter
 #Need to pass in the PV name for the getRAMPSTATUS protocol.
 setRAMP {
    out "RAMP 1,%(\$1.VAL)d,%f";
 }
 
-#Set the ramp status
+# /// Set the ramp status
 #Need to pass in the PV name for the getRAMP protocol.
 setRAMPSTATUS {
    out "RAMP 1,%d,%(\$1.VAL)f";

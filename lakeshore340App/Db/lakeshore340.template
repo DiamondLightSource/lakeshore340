@@ -16,101 +16,129 @@
 # Set records
 ################################################################
 
+# /// 
 # /// Read the ID string from the device.
+# ///
 record(stringin, "$(P):ID") {
   field(DTYP, "stream")
   field(INP, "@ls340.protocol getID $(PORT) $(ADDR)")
   field(SCAN, "$(SCAN)")
 }
 
+# /// 
 # /// Read the heater output value.
+# ///
 record(ai, "$(P):HTR") {
   field(DTYP, "stream")
   field(INP, "@ls340.protocol getHTR $(PORT) $(ADDR)")
   field(SCAN, "$(SCAN)")
 }
 
+# /// 
 # /// Read the setpoint temperature.
+# ///
 record(ai, "$(P):SETP") {
   field(DTYP, "stream")
   field(INP, "@ls340.protocol getSETP $(PORT) $(ADDR)")
   field(SCAN, "$(SCAN)")
 }
 
+# /// 
 # /// Read the temperature on channel 0 in Kelvin.
+# ///
 record(ai, "$(P):KRDG0") {
   field(DTYP, "stream")
   field(INP, "@ls340.protocol getKRDG(0) $(PORT) $(ADDR)")
   field(SCAN, "$(TEMPSCAN)")
 }
 
+# /// 
 # /// Read the temperature on channel 1 in Kelvin.
+# ///
 record(ai, "$(P):KRDG1") {
   field(DTYP, "stream")
   field(INP, "@ls340.protocol getKRDG(1) $(PORT) $(ADDR)")
   field(SCAN, "$(TEMPSCAN)")
 }
 
+# /// 
 # /// Read the temperature on channel 2 in Kelvin.
+# ///
 record(ai, "$(P):KRDG2") {
   field(DTYP, "stream")
   field(INP, "@ls340.protocol getKRDG(2) $(PORT) $(ADDR)")
   field(SCAN, "$(TEMPSCAN)")
 }
 
+# /// 
 # /// Read the temperature on channel 3 in Kelvin.
+# ///
 record(ai, "$(P):KRDG3") {
   field(DTYP, "stream")
   field(INP, "@ls340.protocol getKRDG(3) $(PORT) $(ADDR)")
   field(SCAN, "$(TEMPSCAN)")
 }
 
+# /// 
 # /// Read the raw voltage on channel 0.
+# ///
 record(ai, "$(P):SRDG0") {
   field(DTYP, "stream")
   field(INP, "@ls340.protocol getSRDG(0) $(PORT) $(ADDR)")
 field(SCAN, "$(TEMPSCAN)")
 }
 
+# /// 
 # /// Read the raw voltage on channel 1.
+# ///
 record(ai, "$(P):SRDG1") {
   field(DTYP, "stream")
   field(INP, "@ls340.protocol getSRDG(1) $(PORT) $(ADDR)")
   field(SCAN, "$(TEMPSCAN)")
 }
 
+# /// 
 # /// Read the raw voltage on channel 2.
+# ///
 record(ai, "$(P):SRDG2") {
   field(DTYP, "stream")
   field(INP, "@ls340.protocol getSRDG(2) $(PORT) $(ADDR)")
   field(SCAN, "$(TEMPSCAN)")
 }
 
+# /// 
 # /// Read the raw voltage on channel 3.
+# ///
 record(ai, "$(P):SRDG3") {
   field(DTYP, "stream")
   field(INP, "@ls340.protocol getSRDG(3) $(PORT) $(ADDR)")
   field(SCAN, "$(TEMPSCAN)")
 }
 
+# /// 
 # /// Read the range parameter (the heater output power range).
+# ///
 record(ai, "$(P):RANGE") {
   field(DTYP, "stream")
   field(INP, "@ls340.protocol getRANGE $(PORT) $(ADDR)")
   field(SCAN, "$(SCAN)")
 }
 
+# /// 
 # /// Read the ramp paremeter.
+# ///
 record(ai, "$(P):RAMP") {
   field(DTYP, "stream")
   field(INP, "@ls340.protocol getRAMP $(PORT) $(ADDR)")
   field(SCAN, "$(SCAN)")
 }
 
+# /// 
 # /// Read the ramp status parameter.
 # .
 # /// 0=off
 # /// 1=on
+# ///
 record(ai, "$(P):RAMPST") {
   field(DTYP, "stream")
   field(INP, "@ls340.protocol getRAMPSTATUS $(PORT) $(ADDR)")
@@ -121,20 +149,25 @@ record(ai, "$(P):RAMPST") {
 # Set records
 ################################################################
 
+# /// 
 # /// Set the setpoint temperature.
+# ///
 record(ao, "$(P):SETP_S") {
   field(DTYP, "stream")
   field(OUT, "@ls340.protocol setSETP $(PORT) $(ADDR)")
 }
 
+# /// 
 # /// Set the range parameter.
 # .
 # /// Possible values are: 0, 1, 2, 3, 4, 5
+# ///
 record(ao, "$(P):RANGE_S") {
   field(DTYP, "stream")
   field(OUT, "@ls340.protocol setRANGE $(PORT) $(ADDR)")
 }
 
+# /// 
 # /// Set the ramp rate parameter.
 # .
 # /// This is the desired temperate increase/decrease rate
@@ -145,11 +178,13 @@ record(ao, "$(P):RANGE_S") {
 # /// record the existing/desired ramp status, as well as the 
 # /// desired ramp. This is done automatically by reading the 
 # /// PV which holds the current ramp status.
+# ///
 record(ao, "$(P):RAMP_S") {
   field(DTYP, "stream")
   field(OUT, "@ls340.protocol setRAMP($(P):RAMPST) $(PORT) $(ADDR)")
 }
 
+# /// 
 # /// Set the ramp status parameter.
 # .
 # /// 0=off
@@ -160,6 +195,7 @@ record(ao, "$(P):RAMP_S") {
 # /// record the existing/desired ramp, as well as the 
 # /// desired ramp status. This is done automatically by reading the 
 # /// PV which holds the current ramp value.
+# ///
 record(ao, "$(P):RAMPST_S") {
   field(DTYP, "stream")
   field(OUT, "@ls340.protocol setRAMPSTATUS($(P):RAMP) $(PORT) $(ADDR)")

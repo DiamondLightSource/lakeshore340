@@ -8,9 +8,14 @@ The lakeshore340 support module provides an EPICS interface to the Lakeshore
 
 \subsection use_sec How to use this support module within an IOC application.
 
+This support module makes use of the EPICS ASYN and Streams extensions.
+
 <ol>
-<li> Add a macro that points to the module in configure/RELEASE. e.g. 
+<li> Add a macro that points to the module in configure/RELEASE. Also the ASYN and Stream modules
+need to be referenced, e.g. 
 \verbatim
+    ASYN=$(SUPPORT)/asyn/4-8
+    STREAM=$(SUPPORT)/streamDevice/2-2
     LAKESHORE340 = /home/mp49/epics/support/lakeshore340
 \endverbatim
 
@@ -19,11 +24,56 @@ The lakeshore340 support module provides an EPICS interface to the Lakeshore
 
     BL16I-EA-IOC-01_DBD += lakeshore340.dbd
 
-Note that the module requires the following DBD files in addition to EPICS_BASE
-	asyn.dbd
-	stream.dbd
-	drvAsynSerialPort.dbd
+    #Note that the module requires the following DBD files in addition to base.dbd
+    BL16I-EA-IOC-01_DBD += asyn.dbd
+    BL16I-EA-IOC-01_DBD += drvVxi11.dbd
+    BL16I-EA-IOC-01_DBD += stream.dbd
+    BL16I-EA-IOC-01_DBD += drvAsynSerialPort.dbd
+    BL16I-EA-IOC-01_DBD += drvAsynIPPort.dbd
 \endverbatim
+
+<li> Also in src/Makefile add the following libraries:
+\verbatim
+    BL16I-EA-IOC-01_LIBS += asyn
+    BL16I-EA-IOC-01_LIBS += stream
+\endverbatim
+
+<li> In the Db/Makefile, the following is needed:
+\verbatim
+    USES_TEMPLATE += $(LAKESHORE340)/db/lakeshore340.template
+\endverbatim
+
+<li> In the IOC startup file, the following needs to be added:
+\verbatim
+    #Define protocol path
+    epicsEnvSet("STREAM_PROTOCOL_PATH", "$(INSTALL)/data/")
+    
+    #Records for Lakeshore 340.
+    dbLoadRecords("db/lakeshore340.db")
+    #General purpose Asyn Record.
+    dbLoadRecords("db/asynRecord.db","P=BL16I-EA-LS340-01:,R=ASYN,PORT=L0,ADDR=12,OMAX=0,IMAX=200")
+\endverbatim
+
+The AsynRecord is optional but is useful for debugging and providing easy access to unsupported device functions. It would need to be set up for your own IOC.
+
+Because this support module makes use of the ASYN support of the Agilent E5810A Ethernet->GPIB gateway, the following is also needed:
+\verbatim
+    #The following two commands are for the E5810
+    E5810Reboot("172.23.116.185",0)
+
+    # vxi11Configure parameters:
+    # portName
+    # host name
+    # recover with IFC?
+    # default timeout
+    # vxiName
+    # priority
+    # disable auto-connect
+    vxi11Configure("L0","172.23.116.185",0,0.0,"gpib0",0,0)
+\endverbatim
+
+Again the vxi11Configure() function has to be set up for your particular VXI11 device (in this case the Agilent E5810A).
+
 </ol>
 
 **/
