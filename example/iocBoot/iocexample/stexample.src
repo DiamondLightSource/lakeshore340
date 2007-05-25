@@ -1,0 +1,52 @@
+#!$(INSTALL)/bin/$(ARCH)/example
+
+## You may have to change BL16I-CS-IOC-01 to something else
+## everywhere it appears in this file
+
+cd "$(INSTALL)"
+
+# Load binaries on architectures that need to do so.
+# VXWORKS_ONLY, LINUX_ONLY and RTEMS_ONLY are macros that resolve
+# to a comment symbol on architectures that are not the current
+# build architecture, so they can be used liberally to do architecture
+# specific things. Alternatively, you can include an architecture
+# specific file.
+$(VXWORKS_ONLY)ld < bin/$(ARCH)/example.munch
+
+## This drvTS initializer is needed if the IOC has a hardware event system
+#TSinit
+
+#Define protocol path
+epicsEnvSet("STREAM_PROTOCOL_PATH", "$(INSTALL)/data/")
+
+## Register all support components
+dbLoadDatabase("dbd/example.dbd")
+example_registerRecordDeviceDriver(pdbbase)
+
+## Load record instances
+#dbLoadRecords("db/<filename>.db","<List of macros, e.g. user=xxx>")
+#Records for Lakeshore 340.
+dbLoadRecords("db/lakeshore340.db")
+#General purpose Asyn Record.
+dbLoadRecords("db/asynRecord.db","P=BL16I-EA-LS340-01:,R=ASYN,PORT=L0,ADDR=12,OMAX=0,IMAX=200")
+
+#The following two commands are for the E5810
+E5810Reboot("172.23.116.185",0)
+
+# vxi11Configure parameters:
+# portName
+# host name
+# recover with IFC?
+# default timeout
+# vxiName
+# priority
+# disable auto-connect
+vxi11Configure("L0","172.23.116.185",0,0.0,"gpib0",0,0)
+
+## Set this to see messages from mySub
+#mySubDebug 1
+
+iocInit()
+
+## Start any sequence programs
+#seq sncExample,"user=xxx"
