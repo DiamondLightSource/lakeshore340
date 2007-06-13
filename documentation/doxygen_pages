@@ -14,10 +14,11 @@ This support module makes use of the EPICS ASYN and Streams extensions.
 <li> Add a macro that points to the module in configure/RELEASE. Also the ASYN and Stream modules
 need to be referenced, e.g. 
 \verbatim
-    ASYN=$(SUPPORT)/asyn/4-8
-    STREAM=$(SUPPORT)/streamDevice/2-2
-    LAKESHORE340 = /home/mp49/epics/support/lakeshore340
+    ASYN=		$(SUPPORT)/asyn/X-X
+    STREAM=		$(SUPPORT)/streamDevice/X-X
+    LAKESHORE340=	$(SUPPORT)/lakeshore340/X-X
 \endverbatim
+Note that the streamDevice module must be later than 2-2 (as this has a bug relating to GPIB devices).
 
 <li> Add the module DBD file to the list of DBD. e.g. in src/Makefile\n
 \verbatim
@@ -40,21 +41,20 @@ need to be referenced, e.g.
 
 <li> In the Db/Makefile, the following is needed:
 \verbatim
+    DB += $(ASYN)/db/asynRecord.db    
     USES_TEMPLATE += $(LAKESHORE340)/db/lakeshore340.template
 \endverbatim
+Note that the asynRecord is optional, and needs to be configured correctly in the IOC startup file. However, it is useful to have loaded to be able to use unsupported commands (ie. commands not implemented in the lakeshore340 support module).
 
 <li> In the IOC startup file, the following needs to be added:
 \verbatim
     #Define protocol path
-    epicsEnvSet("STREAM_PROTOCOL_PATH", "$(INSTALL)/data/")
+    epicsEnvSet("STREAM_PROTOCOL_PATH", "$(LAKESHORE340)/data/")
     
-    #Records for Lakeshore 340.
-    dbLoadRecords("db/lakeshore340.db")
     #General purpose Asyn Record.
     dbLoadRecords("db/asynRecord.db","P=BL16I-EA-LS340-01:,R=ASYN,PORT=L0,ADDR=12,OMAX=0,IMAX=200")
 \endverbatim
-
-The AsynRecord is optional but is useful for debugging and providing easy access to unsupported device functions. It would need to be set up for your own IOC.
+If you are using the asyn record, then change the configuration parameters accordingly.
 
 Because this support module makes use of the ASYN support of the Agilent E5810A Ethernet->GPIB gateway, the following is also needed:
 \verbatim
@@ -71,7 +71,6 @@ Because this support module makes use of the ASYN support of the Agilent E5810A 
     # disable auto-connect
     vxi11Configure("L0","172.23.116.185",0,0.0,"gpib0",0,0)
 \endverbatim
-
 Again the vxi11Configure() function has to be set up for your particular VXI11 device (in this case the Agilent E5810A).
 
 </ol>
