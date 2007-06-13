@@ -38,6 +38,7 @@ example_DBD += drvVxi11.dbd
 example_DBD += stream.dbd
 example_DBD += drvAsynSerialPort.dbd
 example_DBD += drvAsynIPPort.dbd
+example_DBD += lakeshore340.dbd
 #example_DBD += xxx.dbd
 
 # example_registerRecordDeviceDriver.cpp will be created

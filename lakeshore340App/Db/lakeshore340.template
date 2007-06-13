@@ -9,6 +9,8 @@
 #   TEMPSCAN - SCAN rate for the temperature/voltage readings
 #   SCAN - SCAN rate for non-temperature/voltage parameters.
 #
+# Notes: The temperatures in Kelvin are archived once every 10 secs.
+#
 ################################################################
 
 
@@ -21,8 +23,8 @@
 # ///
 record(stringin, "$(P):ID") {
   field(DTYP, "stream")
-  field(INP, "@ls340.protocol getID $(PORT) $(ADDR)")
-  field(SCAN, "$(SCAN)")
+  field(INP, "@lakeshore340.proto getID $(PORT) $(ADDR)")
+  field(SCAN, "$(SCAN) second")
 }
 
 # /// 
@@ -30,8 +32,8 @@ record(stringin, "$(P):ID") {
 # ///
 record(ai, "$(P):HTR") {
   field(DTYP, "stream")
-  field(INP, "@ls340.protocol getHTR $(PORT) $(ADDR)")
-  field(SCAN, "$(SCAN)")
+  field(INP, "@lakeshore340.proto getHTR $(PORT) $(ADDR)")
+  field(SCAN, "$(SCAN) second")
 }
 
 # /// 
@@ -39,44 +41,52 @@ record(ai, "$(P):HTR") {
 # ///
 record(ai, "$(P):SETP") {
   field(DTYP, "stream")
-  field(INP, "@ls340.protocol getSETP $(PORT) $(ADDR)")
-  field(SCAN, "$(SCAN)")
+  field(INP, "@lakeshore340.proto getSETP $(PORT) $(ADDR)")
+  field(SCAN, "$(SCAN) second")
 }
 
 # /// 
 # /// Read the temperature on channel 0 in Kelvin.
+# /// This is archived every 10 seconds.
 # ///
+#% archiver 10
 record(ai, "$(P):KRDG0") {
   field(DTYP, "stream")
-  field(INP, "@ls340.protocol getKRDG(0) $(PORT) $(ADDR)")
-  field(SCAN, "$(TEMPSCAN)")
+  field(INP, "@lakeshore340.proto getKRDG(0) $(PORT) $(ADDR)")
+  field(SCAN, "$(TEMPSCAN) second")
 }
 
 # /// 
 # /// Read the temperature on channel 1 in Kelvin.
+# /// This is archived every 10 seconds.
 # ///
+#% archiver 10
 record(ai, "$(P):KRDG1") {
   field(DTYP, "stream")
-  field(INP, "@ls340.protocol getKRDG(1) $(PORT) $(ADDR)")
-  field(SCAN, "$(TEMPSCAN)")
+  field(INP, "@lakeshore340.proto getKRDG(1) $(PORT) $(ADDR)")
+  field(SCAN, "$(TEMPSCAN) second")
 }
 
 # /// 
 # /// Read the temperature on channel 2 in Kelvin.
+# /// This is archived every 10 seconds.
 # ///
+#% archiver 10
 record(ai, "$(P):KRDG2") {
   field(DTYP, "stream")
-  field(INP, "@ls340.protocol getKRDG(2) $(PORT) $(ADDR)")
-  field(SCAN, "$(TEMPSCAN)")
+  field(INP, "@lakeshore340.proto getKRDG(2) $(PORT) $(ADDR)")
+  field(SCAN, "$(TEMPSCAN) second")
 }
 
 # /// 
 # /// Read the temperature on channel 3 in Kelvin.
+# /// This is archived every 10 seconds.
 # ///
+#% archiver 10
 record(ai, "$(P):KRDG3") {
   field(DTYP, "stream")
-  field(INP, "@ls340.protocol getKRDG(3) $(PORT) $(ADDR)")
-  field(SCAN, "$(TEMPSCAN)")
+  field(INP, "@lakeshore340.proto getKRDG(3) $(PORT) $(ADDR)")
+  field(SCAN, "$(TEMPSCAN) second")
 }
 
 # /// 
@@ -84,8 +94,8 @@ record(ai, "$(P):KRDG3") {
 # ///
 record(ai, "$(P):SRDG0") {
   field(DTYP, "stream")
-  field(INP, "@ls340.protocol getSRDG(0) $(PORT) $(ADDR)")
-field(SCAN, "$(TEMPSCAN)")
+  field(INP, "@lakeshore340.proto getSRDG(0) $(PORT) $(ADDR)")
+field(SCAN, "$(TEMPSCAN) second")
 }
 
 # /// 
@@ -93,8 +103,8 @@ field(SCAN, "$(TEMPSCAN)")
 # ///
 record(ai, "$(P):SRDG1") {
   field(DTYP, "stream")
-  field(INP, "@ls340.protocol getSRDG(1) $(PORT) $(ADDR)")
-  field(SCAN, "$(TEMPSCAN)")
+  field(INP, "@lakeshore340.proto getSRDG(1) $(PORT) $(ADDR)")
+  field(SCAN, "$(TEMPSCAN) second")
 }
 
 # /// 
@@ -102,8 +112,8 @@ record(ai, "$(P):SRDG1") {
 # ///
 record(ai, "$(P):SRDG2") {
   field(DTYP, "stream")
-  field(INP, "@ls340.protocol getSRDG(2) $(PORT) $(ADDR)")
-  field(SCAN, "$(TEMPSCAN)")
+  field(INP, "@lakeshore340.proto getSRDG(2) $(PORT) $(ADDR)")
+  field(SCAN, "$(TEMPSCAN) second")
 }
 
 # /// 
@@ -111,8 +121,8 @@ record(ai, "$(P):SRDG2") {
 # ///
 record(ai, "$(P):SRDG3") {
   field(DTYP, "stream")
-  field(INP, "@ls340.protocol getSRDG(3) $(PORT) $(ADDR)")
-  field(SCAN, "$(TEMPSCAN)")
+  field(INP, "@lakeshore340.proto getSRDG(3) $(PORT) $(ADDR)")
+  field(SCAN, "$(TEMPSCAN) second")
 }
 
 # /// 
@@ -120,8 +130,8 @@ record(ai, "$(P):SRDG3") {
 # ///
 record(ai, "$(P):RANGE") {
   field(DTYP, "stream")
-  field(INP, "@ls340.protocol getRANGE $(PORT) $(ADDR)")
-  field(SCAN, "$(SCAN)")
+  field(INP, "@lakeshore340.proto getRANGE $(PORT) $(ADDR)")
+  field(SCAN, "$(SCAN) second")
 }
 
 # /// 
@@ -129,8 +139,8 @@ record(ai, "$(P):RANGE") {
 # ///
 record(ai, "$(P):RAMP") {
   field(DTYP, "stream")
-  field(INP, "@ls340.protocol getRAMP $(PORT) $(ADDR)")
-  field(SCAN, "$(SCAN)")
+  field(INP, "@lakeshore340.proto getRAMP $(PORT) $(ADDR)")
+  field(SCAN, "$(SCAN) second")
 }
 
 # /// 
@@ -141,8 +151,8 @@ record(ai, "$(P):RAMP") {
 # ///
 record(ai, "$(P):RAMPST") {
   field(DTYP, "stream")
-  field(INP, "@ls340.protocol getRAMPSTATUS $(PORT) $(ADDR)")
-  field(SCAN, "$(SCAN)")
+  field(INP, "@lakeshore340.proto getRAMPSTATUS $(PORT) $(ADDR)")
+  field(SCAN, "$(SCAN) second")
 }
 
 ################################################################
@@ -154,7 +164,7 @@ record(ai, "$(P):RAMPST") {
 # ///
 record(ao, "$(P):SETP_S") {
   field(DTYP, "stream")
-  field(OUT, "@ls340.protocol setSETP $(PORT) $(ADDR)")
+  field(OUT, "@lakeshore340.proto setSETP $(PORT) $(ADDR)")
 }
 
 # /// 
@@ -164,7 +174,7 @@ record(ao, "$(P):SETP_S") {
 # ///
 record(ao, "$(P):RANGE_S") {
   field(DTYP, "stream")
-  field(OUT, "@ls340.protocol setRANGE $(PORT) $(ADDR)")
+  field(OUT, "@lakeshore340.proto setRANGE $(PORT) $(ADDR)")
 }
 
 # /// 
@@ -181,7 +191,7 @@ record(ao, "$(P):RANGE_S") {
 # ///
 record(ao, "$(P):RAMP_S") {
   field(DTYP, "stream")
-  field(OUT, "@ls340.protocol setRAMP($(P):RAMPST) $(PORT) $(ADDR)")
+  field(OUT, "@lakeshore340.proto setRAMP($(P):RAMPST) $(PORT) $(ADDR)")
 }
 
 # /// 
@@ -198,5 +208,5 @@ record(ao, "$(P):RAMP_S") {
 # ///
 record(ao, "$(P):RAMPST_S") {
   field(DTYP, "stream")
-  field(OUT, "@ls340.protocol setRAMPSTATUS($(P):RAMP) $(PORT) $(ADDR)")
+  field(OUT, "@lakeshore340.proto setRAMPSTATUS($(P):RAMP) $(PORT) $(ADDR)")
 }

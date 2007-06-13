@@ -1,5 +1,7 @@
 ##################################################
 #
+# Protocol File
+#
 # Protocol file for Lakeshore 340
 # Diamond Light Source, May 2007
 #
@@ -22,9 +24,7 @@ ReplyTimeout = 1000;
 # Get functions
 ###################################################
 
-# /// 
 # /// Read the device ID
-# ///
 getID {
    out "*IDN?";
    in "%s";

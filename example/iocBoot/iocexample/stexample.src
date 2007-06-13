@@ -17,7 +17,7 @@ $(VXWORKS_ONLY)ld < bin/$(ARCH)/example.munch
 #TSinit
 
 #Define protocol path
-epicsEnvSet("STREAM_PROTOCOL_PATH", "$(INSTALL)/data/")
+epicsEnvSet("STREAM_PROTOCOL_PATH", "$(LAKESHORE340)/data/")
 
 ## Register all support components
 dbLoadDatabase("dbd/example.dbd")
