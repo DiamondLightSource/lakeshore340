@@ -15,7 +15,7 @@
 
 
 ################################################################
-# Set records
+# Read records
 ################################################################
 
 # /// 
@@ -155,8 +155,44 @@ record(ai, "$(P):RAMPST") {
   field(SCAN, "$(SCAN) second")
 }
 
+# /// 
+# /// Read the control loop 1 manual output parameter.
+# ///
+record(ai, "$(P):MOUT") {
+  field(DTYP, "stream")
+  field(INP, "@lakeshore340.proto getMOUT $(PORT) $(ADDR)")
+  field(SCAN, "$(SCAN) second")
+}
+
+# /// 
+# /// Read the PID P parameter for control loop 1.
+# ///
+record(ai, "$(P):P") {
+  field(DTYP, "stream")
+  field(INP, "@lakeshore340.proto getP $(PORT) $(ADDR)")
+  field(SCAN, "$(SCAN) second")
+}
+
+# /// 
+# /// Read the PID I parameter for control loop 1.
+# ///
+record(ai, "$(P):I") {
+  field(DTYP, "stream")
+  field(INP, "@lakeshore340.proto getI $(PORT) $(ADDR)")
+  field(SCAN, "$(SCAN) second")
+}
+
+# /// 
+# /// Read the PID D parameter for control loop 1.
+# ///
+record(ai, "$(P):D") {
+  field(DTYP, "stream")
+  field(INP, "@lakeshore340.proto getD $(PORT) $(ADDR)")
+  field(SCAN, "$(SCAN) second")
+}
+
 ################################################################
-# Set records
+# Write records
 ################################################################
 
 # /// 
@@ -210,3 +246,36 @@ record(ao, "$(P):RAMPST_S") {
   field(DTYP, "stream")
   field(OUT, "@lakeshore340.proto setRAMPSTATUS($(P):RAMP) $(PORT) $(ADDR)")
 }
+
+# /// 
+# /// Set the control loop 1 manual output value.
+# ///
+record(ao, "$(P):MOUT_S") {
+  field(DTYP, "stream")
+  field(OUT, "@lakeshore340.proto setMOUT $(PORT) $(ADDR)")
+}
+
+# ///
+# /// Set the PID P parameter for control loop 1.
+# ///
+record(ao, "$(P):P_S") {
+  field(DTYP, "stream")
+  field(OUT, "@lakeshore340.proto setP $(PORT) $(ADDR)")
+}
+
+# ///
+# /// Set the PID I parameter for control loop 1.
+# ///
+record(ao, "$(P):I_S") {
+  field(DTYP, "stream")
+  field(OUT, "@lakeshore340.proto setI($(P):P) $(PORT) $(ADDR)")
+}
+
+# ///
+# /// Set the PID D parameter for control loop 1.
+# ///
+record(ao, "$(P):D_S") {
+  field(DTYP, "stream")
+  field(OUT, "@lakeshore340.proto setD($(P):P,$(P):I) $(PORT) $(ADDR)")
+}
+

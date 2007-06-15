@@ -72,6 +72,37 @@ getRAMPSTATUS {
    in "%d,%*f";
 }
 
+# /// Read the control loop 1 manual output value
+getMOUT {
+   out "MOUT? 1";
+   in "%f";
+}
+
+# /// Read the PID P parameter for control loop 1
+getP {
+   out "PID? 1";
+   in "%f,%*f,%*f";
+}
+
+# /// Read the PID I parameter for control loop 1
+getI {
+   out "PID? 1";
+   in "%*f,%f,%*f";
+}
+
+# /// Read the PID D parameter for control loop 1
+getD {
+   out "PID? 1";
+   in "%*f,%*f,%f";
+}
+
+# /// Read the PID parameters for control loop 1
+#getPID {
+#   out "PID? 1";
+#   separator=",";
+#   in "(%f)";
+#}
+
 
 #######################################################
 # Set functions
@@ -98,3 +129,32 @@ setRAMP {
 setRAMPSTATUS {
    out "RAMP 1,%d,%(\$1.VAL)f";
 }
+
+# /// Set the control loop 1 manual output value.
+setMOUT {
+   out "MOUT 1,%f";
+}
+
+# /// Set the PID P parameter for control loop 1
+#Can just send the first argument for this PID command just just set P
+setP {
+   out "PID 1,%f";
+}
+
+# /// Set the PID I parameter for control loop 1
+#Have to also set P as the first argument in the list. I corresponds to the second argument.
+setI {
+   out "PID 1,%(\$1.VAL)f,%f";
+}
+
+# /// Set the PID D parameter for control loop 1
+#Have to also set the P and I parameters. D corresponds to the third argument.
+setD {
+   out "PID 1,%(\$1.VAL)f,%(\$2.VAL)f,%f";
+}
+
+# /// Set the PID parameters for control loop 1
+#setPID {
+#   separator=",";
+#   out "PID 1,(%f)";
+#}
