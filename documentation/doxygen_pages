@@ -92,3 +92,18 @@ The support module contains the following elements
   Build this module by simply running "make install"
 
 **/
+
+
+/**
+\page add_sec How to add functionality to the module
+
+To add more functionality to this support module (by adding support for more Lakeshore 340 commands), 
+the following files must be edited:
+
+- lakeshore340App/protocol/lakeshore340.proto\n
+  Add the streamDevice protocol functions in this file.
+
+- lakeshore340App/Db/lakeshore340.template\n
+  Add the corresponding record, which when processed will call the streamDevice function.
+
+**/

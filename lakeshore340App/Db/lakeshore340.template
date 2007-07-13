@@ -191,6 +191,15 @@ record(ai, "$(P):D") {
   field(SCAN, "$(SCAN) second")
 }
 
+# /// 
+# /// Read the control loop 1 mode parameter.
+# ///
+record(ai, "$(P):CMODE") {
+  field(DTYP, "stream")
+  field(INP, "@lakeshore340.proto getCMODE $(PORT) $(ADDR)")
+  field(SCAN, "$(SCAN) second")
+}
+
 ################################################################
 # Write records
 ################################################################
@@ -279,3 +288,10 @@ record(ao, "$(P):D_S") {
   field(OUT, "@lakeshore340.proto setD($(P):P,$(P):I) $(PORT) $(ADDR)")
 }
 
+# /// 
+# /// Set the control loop 1 mode value.
+# ///
+record(ao, "$(P):CMODE_S") {
+  field(DTYP, "stream")
+  field(OUT, "@lakeshore340.proto setCMODE $(PORT) $(ADDR)")
+}

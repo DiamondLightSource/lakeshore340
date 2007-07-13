@@ -6,6 +6,13 @@
 
   <articleinfo>
     <title>EPICS Lakeshore 340 Support Module User Guide</title>
+    <author>
+    <personname>
+      <honorific>Dr</honorific>
+      <firstname>Matthew</firstname>
+      <surname>Pearson</surname>
+    </personname>
+  </author>
     <copyright>
       <year>2007</year>
       <holder>Copyright 2007 Diamond Light Source Limited</holder>
@@ -13,16 +20,115 @@
   </articleinfo>
 
   <sect1>
+    <title>Links for detailed information on the Lakeshore 340.</title>
+    <para><ulink url="http://www.lakeshore.com/temp/cn/340po.html">Product Details</ulink></para>
+    <para><ulink url="http://www.lakeshore.com/pdf_files/instruments/340_Manual.pdf">User Manual</ulink></para>
+    <para><ulink url="http://diamdocs2003.diamond.ac.uk/sites/default/TECHNICAL%20DIVISION%20(TEC)/Controls%20and%20Interlocks%20CTRL/Supplier%20Documentation/Lakeshore/340_Manual.pdf">User Manual (local)</ulink></para>
+  </sect1>
+
+  <sect2>
+    <title>Notes</title>
+    <para><ulink url="http://diamdocs2003.diamond.ac.uk/sites/default/TECHNICAL%20DIVISION%20(TEC)/Controls%20and%20Interlocks%20CTRL/Requirements%20(REQ)/TDI-CTRL-REQ-007-Lakeshore-340-requirements.doc">The orginal requirements document.</ulink></para>
+    <para>This software support for the Lakeshore 340 only supports the main PID loop controller. No interface is provided for the secondary PID controller.</para>
+  </sect2>
+
+  <sect1>
+       <title>Process Variable (PV) Names</title>
+         <sect2>
+           <title>Read Only PVs</title>
+             <para>Note: {P} is dependent on how the software has been set-up.</para>
+             <simplelist type='horiz' columns='2'>
+             <member>{P}:HTR</member>
+             <member>Read the heater status</member>
+             <member>{P}:KRDG0</member>
+             <member>Read the temperature in kelvin on channel 1</member>
+             <member>{P}:KRDG1</member>
+             <member>Read the temperature in kelvin on channel 2</member>
+             <member>{P}:KRDG2</member>
+             <member>Read the temperature in kelvin on channel 3</member>
+             <member>{P}:KRDG3</member>
+             <member>Read the temperature in kelvin on channel 4</member>
+             <member>{P}:MOUT</member>
+             <member>Read the control loop 1 manual output value</member>
+             <member>{P}:RAMP</member>
+             <member>Read the ramp value</member>
+             <member>{P}:RAMPST</member>
+             <member>Read the ramp status</member>
+             <member>{P}:RANGE</member>
+             <member>Read the range parameter (power range)</member>
+             <member>{P}:SETP</member>
+             <member>Read the setpoint for control loop 1</member>
+             <member>{P}:SRDG0</member>
+             <member>Read the voltage input on channel 1</member>
+             <member>{P}:SRDG1</member>
+             <member>Read the voltage input on channel 2</member>
+             <member>{P}:SRDG2</member>
+             <member>Read the voltage input on channel 3</member>
+             <member>{P}:SRDG3</member>
+             <member>Read the voltage input on channel 4</member>
+             <member>{P}:ID</member>
+             <member>Read the device ID</member>
+             <member>{P}:P</member>
+             <member>Read the PID P parameter for control loop 1</member>
+             <member>{P}:I</member>
+             <member>Read the PID I parameter for control loop 1</member>
+             <member>{P}:D</member>
+             <member>Read the PID D parameter for control loop 1</member>
+             <member>{P}:CMODE</member>
+             <member>Read the control loop 1 mode</member>
+             </simplelist>
+         </sect2>
+
+         <sect2>
+             <title>Write Only PVs</title>
+             <simplelist type='horiz' columns='2'>
+             <member>{P}:P_S</member>
+             <member>Set the P parameter for the PID loop</member>
+             <member>{P}:I_S</member>
+             <member>Set the I parameter for the PID loop</member>
+             <member>{P}:D_S</member>
+             <member>Set the D parameter for the PID loop</member>
+             <member>{P}:MOUT_S</member>
+             <member>Set the control loop 1 manual output value.</member>
+             <member>{P}:RAMPST_S</member>
+             <member>Set the ramp status</member>
+             <member>{P}:RAMP_S</member>
+             <member>Set the ramp parameter</member>
+             <member>{P}:RANGE_S</member>
+             <member>Set the range parameter</member>
+             <member>{P}:SETP_S</member>
+             <member>Set the setpoint for control loop 1</member>
+             <member>{P}:CMODE_S</member>
+             <member>Set the mode for control loop 1.</member>
+             </simplelist>
+         </sect2>
+
+         <sect2>
+             <title>General purpose ASYN record (can be used for functions not supported by the above PVs)</title>
+              <para>To write a command to the lakeshore, do:</para>
+              <para>caput {P}:ASYN.AOUT {lakeshore command - see manual for syntax}</para>
+              <para>and then to read back the response, do:</para>
+              <para>caget {P}:ASYN.AINP </para>
+         </sect2>
+  </sect1>
+
+  <sect1>
       <title>Trouble Shooting</title>
-    
 
       <sect2>
       <title>Device not responding?</title>
       <para></para>
       <itemizedlist mark='opencircle'>
-      <listitem><para></para></listitem>
-      <listitem><para></para></listitem>
-      <listitem><para>Try powering the device on and off.</para></listitem>
+      <listitem><para>
+         Restart the IOC where this database is hosted.
+      </para></listitem>
+      <listitem><para>
+         If the device is controlled via an Ethernet->GPIB gateway, try to power cycle the gateway.
+         This will require a restart of the IOC where this database is hosted.
+      </para></listitem>
+      <listitem><para>
+         Try powering the Lakeshore device on and off.
+      </para></listitem>
       </itemizedlist>
       </sect2>
       

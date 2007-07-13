@@ -96,12 +96,12 @@ getD {
    in "%*f,%*f,%f";
 }
 
-# /// Read the PID parameters for control loop 1
-#getPID {
-#   out "PID? 1";
-#   separator=",";
-#   in "(%f)";
-#}
+
+# /// Read the control loop 1 mode
+getCMODE {
+   out "CMODE? 1";
+   in "%d";
+}
 
 
 #######################################################
@@ -153,8 +153,8 @@ setD {
    out "PID 1,%(\$1.VAL)f,%(\$2.VAL)f,%f";
 }
 
-# /// Set the PID parameters for control loop 1
-#setPID {
-#   separator=",";
-#   out "PID 1,(%f)";
-#}
+# /// Set the mode for control loop 1.
+setCMODE {
+   out "CMODE 1,%d";
+}
+
