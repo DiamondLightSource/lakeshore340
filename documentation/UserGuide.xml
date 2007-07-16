@@ -28,7 +28,7 @@
   <sect2>
     <title>Notes</title>
     <para><ulink url="http://diamdocs2003.diamond.ac.uk/sites/default/TECHNICAL%20DIVISION%20(TEC)/Controls%20and%20Interlocks%20CTRL/Requirements%20(REQ)/TDI-CTRL-REQ-007-Lakeshore-340-requirements.doc">The orginal requirements document.</ulink></para>
-    <para>This software support for the Lakeshore 340 only supports the main PID loop controller.. No interface is provided for the secondary PID controller.</para>
+    <para>This software support for the Lakeshore 340 only supports the main PID loop controller. No interface is provided for the secondary PID controller.</para>
   </sect2>
   </sect1>
 
