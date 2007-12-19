@@ -13,6 +13,8 @@
 #
 ################################################################
 
+#% gdatag,template,lakeshore340,$(gda_name),$(gda_desc)
+
 
 ################################################################
 # Read records
@@ -49,11 +51,11 @@ record(ai, "$(P):SETP") {
 # /// Read the temperature on channel 0 in Kelvin.
 # /// This is archived every 10 seconds.
 # ///
-#% gda,interface,ls340,general,temperatures,ls340 temperatures
-#% gda,subsystem,ls340,monitor,T1,ls340 temperature 1
+#% gdatag,pv,ro,$(gda_name),KRDG0
 #% archiver 10 Monitor
 record(ai, "$(P):KRDG0") {
   field(DTYP, "stream")
+  field(DESC, "Channel 0 temperature")
   field(INP, "@lakeshore340.proto getKRDG(0) $(PORT) $(ADDR)")
   field(SCAN, "$(TEMPSCAN) second")
 }
@@ -62,10 +64,11 @@ record(ai, "$(P):KRDG0") {
 # /// Read the temperature on channel 1 in Kelvin.
 # /// This is archived every 10 seconds.
 # ///
-#% gda,subsystem,ls340,monitor,T2,ls340 temperature 2
+#% gdatag,pv,ro,$(gda_name),KRDG1
 #% archiver 10 Monitor
 record(ai, "$(P):KRDG1") {
   field(DTYP, "stream")
+  field(DESC, "Channel 1 temperature")
   field(INP, "@lakeshore340.proto getKRDG(1) $(PORT) $(ADDR)")
   field(SCAN, "$(TEMPSCAN) second")
 }
@@ -74,10 +77,11 @@ record(ai, "$(P):KRDG1") {
 # /// Read the temperature on channel 2 in Kelvin.
 # /// This is archived every 10 seconds.
 # ///
-#% gda,subsystem,ls340,monitor,T3,ls340 temperature 3
+#% gdatag,pv,ro,$(gda_name),KRDG2
 #% archiver 10 Monitor
 record(ai, "$(P):KRDG2") {
   field(DTYP, "stream")
+  field(DESC, "Channel 2 temperature")
   field(INP, "@lakeshore340.proto getKRDG(2) $(PORT) $(ADDR)")
   field(SCAN, "$(TEMPSCAN) second")
 }
@@ -86,10 +90,11 @@ record(ai, "$(P):KRDG2") {
 # /// Read the temperature on channel 3 in Kelvin.
 # /// This is archived every 10 seconds.
 # ///
-#% gda,subsystem,ls340,monitor,T4,ls340 temperature 4
+#% gdatag,pv,ro,$(gda_name),KRDG3
 #% archiver 10 Monitor
 record(ai, "$(P):KRDG3") {
   field(DTYP, "stream")
+  field(DESC, "Channel 3 temperature")
   field(INP, "@lakeshore340.proto getKRDG(3) $(PORT) $(ADDR)")
   field(SCAN, "$(TEMPSCAN) second")
 }
@@ -212,9 +217,11 @@ record(ai, "$(P):CMODE") {
 # /// 
 # /// Set the setpoint temperature.
 # ///
+#% gdatag,pv,rw,$(gda_name),SETP_S
 #% autosave 1 VAL
 record(ao, "$(P):SETP_S") {
   field(DTYP, "stream")
+  field(DESC, "Setpoint temperature")
   field(OUT, "@lakeshore340.proto setSETP $(PORT) $(ADDR)")
 }
 
