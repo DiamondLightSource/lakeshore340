@@ -53,6 +53,7 @@ record(ai, "$(P):SETP") {
 # ///
 #% gdatag,pv,ro,$(gda_name),KRDG0
 #% archiver 10 Monitor
+#% alh 
 record(ai, "$(P):KRDG0") {
   field(DTYP, "stream")
   field(DESC, "Channel 0 temperature")
@@ -66,6 +67,7 @@ record(ai, "$(P):KRDG0") {
 # ///
 #% gdatag,pv,ro,$(gda_name),KRDG1
 #% archiver 10 Monitor
+#% alh 
 record(ai, "$(P):KRDG1") {
   field(DTYP, "stream")
   field(DESC, "Channel 1 temperature")
@@ -79,6 +81,7 @@ record(ai, "$(P):KRDG1") {
 # ///
 #% gdatag,pv,ro,$(gda_name),KRDG2
 #% archiver 10 Monitor
+#% alh 
 record(ai, "$(P):KRDG2") {
   field(DTYP, "stream")
   field(DESC, "Channel 2 temperature")
@@ -92,6 +95,7 @@ record(ai, "$(P):KRDG2") {
 # ///
 #% gdatag,pv,ro,$(gda_name),KRDG3
 #% archiver 10 Monitor
+#% alh 
 record(ai, "$(P):KRDG3") {
   field(DTYP, "stream")
   field(DESC, "Channel 3 temperature")
