@@ -214,6 +214,16 @@ record(ai, "$(P):CMODE") {
   field(SCAN, "$(SCAN) second")
 }
 
+
+# ///
+# /// Read the control loop auto tuning status
+# ///
+record(ai, "$(P):TUNEST") {
+  field(DTYP, "stream")
+  field(INP, "@lakeshore340.proto getTUNEST $(PORT) $(ADDR)")
+  field(SCAN, "$(SCAN) second")
+}
+
 ################################################################
 # Write records
 ################################################################

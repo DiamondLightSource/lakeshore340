@@ -103,6 +103,12 @@ getCMODE {
    in "%d";
 }
 
+# /// Read the control loop auto tuning status
+getTUNEST {
+   out "TUNEST?";
+   in "%d";
+}
+
 
 #######################################################
 # Set functions

@@ -76,6 +76,8 @@
              <member>Read the PID D parameter for control loop 1</member>
              <member>{P}:CMODE</member>
              <member>Read the control loop 1 mode</member>
+             <member>{P}:TUNEST</member>
+             <member>Read the control loop 1 auto tuning status</member>
              </simplelist>
          </sect2>
 
