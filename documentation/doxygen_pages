@@ -107,3 +107,79 @@ the following files must be edited:
   Add the corresponding record, which when processed will call the streamDevice function.
 
 **/
+
+
+/**
+\page user_sec EPICS Lakeshore 340 User Guide
+
+<h3>Introduction</h3>
+
+This software support for the Lakeshore 340 only supports the main PID loop controller.
+
+No interface is provided for the secondary PID controller.
+
+<h3>EPICS/GDA interface:</h3>
+
+<table border="1">
+<tr>
+<td>ELEMENT</td>
+<td>DESCRIPTION</td>
+<td>TYPE</td>
+<td>READ ONLY</td>
+</tr>
+<tr>
+<td>KRDG0</td>
+<td>channel 0 temperature</td>
+<td>pv</td>
+<td>true</td>
+</tr>
+<tr>
+<td>KRDG1</td>
+<td>channel 1 temperature</td>
+<td>pv</td>
+<td>true</td>
+</tr>
+<tr>
+<td>KRDG2</td>
+<td>channel 2 temperature</td>
+<td>pv</td>
+<td>true</td>
+</tr>
+<tr>
+<td>KRDG3</td>
+<td>channel 3 temperature</td>
+<td>pv</td>
+<td>true</td>
+</tr>
+<tr>
+<td>SETP_S</td>
+<td>setpoint temperature</td>
+<td>pv</td>
+<td>false</td>
+</tr>
+</table>
+
+<h4>Usage:</h4>
+
+The temperatures can be read on all 4 channels by using the PVs defined above.
+
+The temperature setpoint can be set by writing to SETP_S.
+
+<h3>Lakeshore 340 information and user manual:</h3>
+
+http://www.lakeshore.com/temp/cn/340po.html
+
+http://www.lakeshore.com/pdf_files/instruments/340_Manual.pdf
+
+file:///dls_sw/work/R3.14.8.2/support/lakeshore340/documentation/manufacturer/340_Manual.pdf (local)
+
+
+<h3>Requirements document:</h3>
+
+file:///dls_sw/work/R3.14.8.2/support/lakeshore340/documentation/requirements/TDI-CTRL-REQ-007-Lakeshore-340-requirements.doc (local)
+
+
+<h3>Module contact:</h3>
+Matthew Pearson (mp49)
+
+**/
