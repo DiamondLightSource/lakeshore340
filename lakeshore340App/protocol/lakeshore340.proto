@@ -117,50 +117,59 @@ getTUNEST {
 # /// Set the setpoint for control loop 1
 setSETP {
    out "SETP 1,%f";
+   @init { getSETP; }
 }
 
 # /// Set the range parameter
 setRANGE {
    out "RANGE %d";
+   @init { getRANGE; }
 }
 
 # /// Set the ramp parameter
 #Need to pass in the PV name for the getRAMPSTATUS protocol.
 setRAMP {
    out "RAMP 1,%(\$1.VAL)d,%f";
+   @init { getRAMP; }
 }
 
 # /// Set the ramp status
 #Need to pass in the PV name for the getRAMP protocol.
 setRAMPSTATUS {
    out "RAMP 1,%d,%(\$1.VAL)f";
+   @init { getRAMPSTATUS; }
 }
 
 # /// Set the control loop 1 manual output value.
 setMOUT {
    out "MOUT 1,%f";
+   @init { getMOUT; }
 }
 
 # /// Set the PID P parameter for control loop 1
 #Can just send the first argument for this PID command just just set P
 setP {
    out "PID 1,%f";
+   @init { getP; }
 }
 
 # /// Set the PID I parameter for control loop 1
 #Have to also set P as the first argument in the list. I corresponds to the second argument.
 setI {
    out "PID 1,%(\$1.VAL)f,%f";
+   @init { getI; }
 }
 
 # /// Set the PID D parameter for control loop 1
 #Have to also set the P and I parameters. D corresponds to the third argument.
 setD {
    out "PID 1,%(\$1.VAL)f,%(\$2.VAL)f,%f";
+   @init { getD; }   
 }
 
 # /// Set the mode for control loop 1.
 setCMODE {
    out "CMODE 1,%d";
+   @init { getCMODE; }   
 }
 

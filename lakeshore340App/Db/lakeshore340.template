@@ -14,7 +14,15 @@
 ################################################################
 
 #% gdatag,template,lakeshore340,$(gda_name),$(gda_desc)
-
+# % gdatag,binary,rw,$(gda_name),DISABLE
+record(bo, "$(P):DISABLE") {
+  field(DESC, "Disable comms")
+  field(PINI, "YES")
+  field(VAL, "0")
+  field(OMSL, "supervisory")
+  field(ZNAM, "Enabled")
+  field(ONAM, "Disabled")
+}
 
 ################################################################
 # Read records
@@ -25,6 +33,7 @@
 # ///
 record(stringin, "$(P):ID") {
   field(DTYP, "stream")
+  field(SDIS, "$(P):DISABLE")
   field(INP, "@lakeshore340.proto getID $(PORT) $(ADDR)")
   field(SCAN, "$(SCAN) second")
 }
@@ -34,8 +43,11 @@ record(stringin, "$(P):ID") {
 # ///
 record(ai, "$(P):HTR") {
   field(DTYP, "stream")
+  field(SDIS, "$(P):DISABLE")
   field(INP, "@lakeshore340.proto getHTR $(PORT) $(ADDR)")
   field(SCAN, "$(SCAN) second")
+  field(PREC, 3)
+  field(EGU, "%")
 }
 
 # /// 
@@ -43,8 +55,11 @@ record(ai, "$(P):HTR") {
 # ///
 record(ai, "$(P):SETP") {
   field(DTYP, "stream")
+  field(SDIS, "$(P):DISABLE")
   field(INP, "@lakeshore340.proto getSETP $(PORT) $(ADDR)")
   field(SCAN, "$(SCAN) second")
+  field(PREC, 3)
+  field(EGU, "K")
 }
 
 # /// 
@@ -56,9 +71,12 @@ record(ai, "$(P):SETP") {
 #% alh 
 record(ai, "$(P):KRDG0") {
   field(DTYP, "stream")
+  field(SDIS, "$(P):DISABLE")
   field(DESC, "Channel 0 temperature")
   field(INP, "@lakeshore340.proto getKRDG(0) $(PORT) $(ADDR)")
   field(SCAN, "$(TEMPSCAN) second")
+  field(PREC, 3)
+  field(EGU, "K")
 }
 
 # /// 
@@ -70,9 +88,12 @@ record(ai, "$(P):KRDG0") {
 #% alh 
 record(ai, "$(P):KRDG1") {
   field(DTYP, "stream")
+  field(SDIS, "$(P):DISABLE")
   field(DESC, "Channel 1 temperature")
   field(INP, "@lakeshore340.proto getKRDG(1) $(PORT) $(ADDR)")
   field(SCAN, "$(TEMPSCAN) second")
+  field(PREC, 3)
+  field(EGU, "K")
 }
 
 # /// 
@@ -84,9 +105,12 @@ record(ai, "$(P):KRDG1") {
 #% alh 
 record(ai, "$(P):KRDG2") {
   field(DTYP, "stream")
+  field(SDIS, "$(P):DISABLE")
   field(DESC, "Channel 2 temperature")
   field(INP, "@lakeshore340.proto getKRDG(2) $(PORT) $(ADDR)")
   field(SCAN, "$(TEMPSCAN) second")
+  field(PREC, 3)
+  field(EGU, "K")
 }
 
 # /// 
@@ -98,9 +122,12 @@ record(ai, "$(P):KRDG2") {
 #% alh 
 record(ai, "$(P):KRDG3") {
   field(DTYP, "stream")
+  field(SDIS, "$(P):DISABLE")
   field(DESC, "Channel 3 temperature")
   field(INP, "@lakeshore340.proto getKRDG(3) $(PORT) $(ADDR)")
   field(SCAN, "$(TEMPSCAN) second")
+  field(PREC, 3)
+  field(EGU, "K")
 }
 
 # /// 
@@ -108,8 +135,11 @@ record(ai, "$(P):KRDG3") {
 # ///
 record(ai, "$(P):SRDG0") {
   field(DTYP, "stream")
+  field(SDIS, "$(P):DISABLE")
   field(INP, "@lakeshore340.proto getSRDG(0) $(PORT) $(ADDR)")
-field(SCAN, "$(TEMPSCAN) second")
+  field(SCAN, "$(TEMPSCAN) second")
+  field(PREC, 3)
+  field(EGU, "V")
 }
 
 # /// 
@@ -117,8 +147,11 @@ field(SCAN, "$(TEMPSCAN) second")
 # ///
 record(ai, "$(P):SRDG1") {
   field(DTYP, "stream")
+  field(SDIS, "$(P):DISABLE")
   field(INP, "@lakeshore340.proto getSRDG(1) $(PORT) $(ADDR)")
   field(SCAN, "$(TEMPSCAN) second")
+  field(PREC, 3)
+  field(EGU, "V")
 }
 
 # /// 
@@ -126,8 +159,11 @@ record(ai, "$(P):SRDG1") {
 # ///
 record(ai, "$(P):SRDG2") {
   field(DTYP, "stream")
+  field(SDIS, "$(P):DISABLE")
   field(INP, "@lakeshore340.proto getSRDG(2) $(PORT) $(ADDR)")
   field(SCAN, "$(TEMPSCAN) second")
+  field(PREC, 3)
+  field(EGU, "V")
 }
 
 # /// 
@@ -135,8 +171,11 @@ record(ai, "$(P):SRDG2") {
 # ///
 record(ai, "$(P):SRDG3") {
   field(DTYP, "stream")
+  field(SDIS, "$(P):DISABLE")
   field(INP, "@lakeshore340.proto getSRDG(3) $(PORT) $(ADDR)")
   field(SCAN, "$(TEMPSCAN) second")
+  field(PREC, 3)
+  field(EGU, "V")
 }
 
 # /// 
@@ -144,6 +183,7 @@ record(ai, "$(P):SRDG3") {
 # ///
 record(ai, "$(P):RANGE") {
   field(DTYP, "stream")
+  field(SDIS, "$(P):DISABLE")
   field(INP, "@lakeshore340.proto getRANGE $(PORT) $(ADDR)")
   field(SCAN, "$(SCAN) second")
 }
@@ -153,8 +193,11 @@ record(ai, "$(P):RANGE") {
 # ///
 record(ai, "$(P):RAMP") {
   field(DTYP, "stream")
+  field(SDIS, "$(P):DISABLE")
   field(INP, "@lakeshore340.proto getRAMP $(PORT) $(ADDR)")
   field(SCAN, "$(SCAN) second")
+  field(PREC, 3)
+  field(EGU, "K/min")  
 }
 
 # /// 
@@ -165,6 +208,7 @@ record(ai, "$(P):RAMP") {
 # ///
 record(ai, "$(P):RAMPST") {
   field(DTYP, "stream")
+  field(SDIS, "$(P):DISABLE")
   field(INP, "@lakeshore340.proto getRAMPSTATUS $(PORT) $(ADDR)")
   field(SCAN, "$(SCAN) second")
 }
@@ -174,6 +218,7 @@ record(ai, "$(P):RAMPST") {
 # ///
 record(ai, "$(P):MOUT") {
   field(DTYP, "stream")
+  field(SDIS, "$(P):DISABLE")
   field(INP, "@lakeshore340.proto getMOUT $(PORT) $(ADDR)")
   field(SCAN, "$(SCAN) second")
 }
@@ -183,6 +228,7 @@ record(ai, "$(P):MOUT") {
 # ///
 record(ai, "$(P):P") {
   field(DTYP, "stream")
+  field(SDIS, "$(P):DISABLE")
   field(INP, "@lakeshore340.proto getP $(PORT) $(ADDR)")
   field(SCAN, "$(SCAN) second")
 }
@@ -192,6 +238,7 @@ record(ai, "$(P):P") {
 # ///
 record(ai, "$(P):I") {
   field(DTYP, "stream")
+  field(SDIS, "$(P):DISABLE")
   field(INP, "@lakeshore340.proto getI $(PORT) $(ADDR)")
   field(SCAN, "$(SCAN) second")
 }
@@ -201,6 +248,7 @@ record(ai, "$(P):I") {
 # ///
 record(ai, "$(P):D") {
   field(DTYP, "stream")
+  field(SDIS, "$(P):DISABLE")
   field(INP, "@lakeshore340.proto getD $(PORT) $(ADDR)")
   field(SCAN, "$(SCAN) second")
 }
@@ -210,6 +258,7 @@ record(ai, "$(P):D") {
 # ///
 record(ai, "$(P):CMODE") {
   field(DTYP, "stream")
+  field(SDIS, "$(P):DISABLE")
   field(INP, "@lakeshore340.proto getCMODE $(PORT) $(ADDR)")
   field(SCAN, "$(SCAN) second")
 }
@@ -220,6 +269,7 @@ record(ai, "$(P):CMODE") {
 # ///
 record(ai, "$(P):TUNEST") {
   field(DTYP, "stream")
+  field(SDIS, "$(P):DISABLE")
   field(INP, "@lakeshore340.proto getTUNEST $(PORT) $(ADDR)")
   field(SCAN, "$(SCAN) second")
 }
@@ -235,8 +285,12 @@ record(ai, "$(P):TUNEST") {
 #% autosave 1 VAL
 record(ao, "$(P):SETP_S") {
   field(DTYP, "stream")
+  field(SDIS, "$(P):DISABLE")
   field(DESC, "Setpoint temperature")
   field(OUT, "@lakeshore340.proto setSETP $(PORT) $(ADDR)")
+  field(PREC, 3)
+  field(FLNK, "$(P):SETP")
+  field(EGU, "K")
 }
 
 # /// 
@@ -247,7 +301,9 @@ record(ao, "$(P):SETP_S") {
 #% autosave 1 VAL
 record(ao, "$(P):RANGE_S") {
   field(DTYP, "stream")
+  field(SDIS, "$(P):DISABLE")
   field(OUT, "@lakeshore340.proto setRANGE $(PORT) $(ADDR)")
+  field(FLNK, "$(P):RANGE")  
 }
 
 # /// 
@@ -265,7 +321,11 @@ record(ao, "$(P):RANGE_S") {
 #% autosave 1 VAL
 record(ao, "$(P):RAMP_S") {
   field(DTYP, "stream")
+  field(SDIS, "$(P):DISABLE")
   field(OUT, "@lakeshore340.proto setRAMP($(P):RAMPST) $(PORT) $(ADDR)")
+  field(PREC, 3)
+  field(FLNK, "$(P):RAMP")
+  field(EGU, "K/min")
 }
 
 # /// 
@@ -283,7 +343,9 @@ record(ao, "$(P):RAMP_S") {
 #% autosave 1 VAL
 record(ao, "$(P):RAMPST_S") {
   field(DTYP, "stream")
+  field(SDIS, "$(P):DISABLE")
   field(OUT, "@lakeshore340.proto setRAMPSTATUS($(P):RAMP) $(PORT) $(ADDR)")
+  field(FLNK, "$(P):RAMPST")
 }
 
 # /// 
@@ -292,7 +354,9 @@ record(ao, "$(P):RAMPST_S") {
 #% autosave 1 VAL
 record(ao, "$(P):MOUT_S") {
   field(DTYP, "stream")
+  field(SDIS, "$(P):DISABLE")
   field(OUT, "@lakeshore340.proto setMOUT $(PORT) $(ADDR)")
+  field(FLNK, "$(P):MOUT")
 }
 
 # ///
@@ -301,7 +365,9 @@ record(ao, "$(P):MOUT_S") {
 #% autosave 1 VAL
 record(ao, "$(P):P_S") {
   field(DTYP, "stream")
+  field(SDIS, "$(P):DISABLE")
   field(OUT, "@lakeshore340.proto setP $(PORT) $(ADDR)")
+  field(FLNK, "$(P):P")
 }
 
 # ///
@@ -310,7 +376,9 @@ record(ao, "$(P):P_S") {
 #% autosave 1 VAL
 record(ao, "$(P):I_S") {
   field(DTYP, "stream")
+  field(SDIS, "$(P):DISABLE")
   field(OUT, "@lakeshore340.proto setI($(P):P) $(PORT) $(ADDR)")
+  field(FLNK, "$(P):I")
 }
 
 # ///
@@ -319,7 +387,9 @@ record(ao, "$(P):I_S") {
 #% autosave 1 VAL
 record(ao, "$(P):D_S") {
   field(DTYP, "stream")
+  field(SDIS, "$(P):DISABLE")
   field(OUT, "@lakeshore340.proto setD($(P):P,$(P):I) $(PORT) $(ADDR)")
+  field(FLNK, "$(P):D")
 }
 
 # /// 
@@ -328,5 +398,7 @@ record(ao, "$(P):D_S") {
 #% autosave 1 VAL
 record(ao, "$(P):CMODE_S") {
   field(DTYP, "stream")
+  field(SDIS, "$(P):DISABLE")
   field(OUT, "@lakeshore340.proto setCMODE $(PORT) $(ADDR)")
+  field(FLNK, "$(P):CMODE")
 }
