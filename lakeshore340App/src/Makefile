@@ -34,5 +34,6 @@ lakeshore340_LIBS += $(EPICS_BASE_IOC_LIBS)
 # The following adds object code from base/src/vxWorks
 currAmp_OBJS_vxWorks += $(EPICS_BASE_BIN)/vxComLibrary
 
+DATA+=lakeshore340_sim.py
 
 include $(TOP)/configure/RULES
