@@ -51,9 +51,11 @@ class ls340data(object):
          self.__mout = fval
 
    def setPID(self, p, i, d):
-      self.__p = int(p)
-      self.__i = int(i)
-      self.__d = int(d)
+      self.__p = float(p)
+      if (i != None):
+         self.__i = float(i)
+      if (d != None):
+         self.__d = float(d)
 
    def setCMODE(self, cmode):
       icmode = int(cmode)
@@ -154,15 +156,16 @@ class ls340(serial_device):
     
    def __init__(self):
       '''Constructor.  Remember to call the base class constructor.'''
-      serial_device.__init__(self,protocolBranches = ["blah1", "blah2", "blah3", "blah4"], power=True)
+
+      protocolBranches = ["*IDN?", "HTR?", "SETP?", "KRDG?", "SRDG?", "RANGE?", "RAMP?", "MOUT?", "PID?",
+                          "CMODE?", "TUNEST?", "SETP", "RANGE", "RAMP", "MOUT", "PID_P", "PID_I", "PID_D", "CMODE"]
+      
+      serial_device.__init__(self, protocolBranches, power=True)
       print "Initialising ls340 simulator, V1.0"
-      self.temperature1 = 0.0
-      self.temperature2 = 0.0
-      self.temperature3 = 0.0
-      self.temperature4 = 0.0
 
       self.__ls340data = ls340data()
 
+      #Valid channel numbers
       self.__channels = ["0","1","2","3"]
         
       return
@@ -175,20 +178,21 @@ class ls340(serial_device):
       with a response to the command or None.'''
 
       result = None
-
-      #print "ls340sim::reply: " + repr(command)
       
       if self.diagnosticLevel() > 0:
-         print "ls340::reply. command: " + command
+         print "ls340::reply. command: " + repr(command)
 
       if (command == "*IDN?"):
          result = self.__ls340data.getIDN()
+         self.covered("*IDN?")
 
       elif (command == "HTR?"):
          result = self.__ls340data.getHTR()
+         self.covered("HTR?")
 
       elif (command == "SETP? 1"):
          result = self.__ls340data.getSETP()
+         self.covered("SETP?")
 
       elif (command.startswith("KRDG?")):
          chan = command.split(" ")[1]
@@ -196,6 +200,7 @@ class ls340(serial_device):
             result = None
          else:
             result = self.__ls340data.getKRDG()
+         self.covered("KRDG?")
 
       elif (command.startswith("SRDG?")):
          chan = command.split(" ")[1]
@@ -203,63 +208,84 @@ class ls340(serial_device):
             result = None
          else:
             result = self.__ls340data.getSRDG()
+         self.covered("SRDG?")
 
       elif (command == "RANGE?"):
          result = self.__ls340data.getRANGE()
+         self.covered("RANGE?")
 
       elif (command == "RAMP? 1"):
          result = self.__ls340data.getRAMP()
+         self.covered("RAMP?")
 
       elif (command == "MOUT? 1"):
          result = self.__ls340data.getMOUT()
+         self.covered("MOUT?")
 
       elif (command == "PID? 1"):
          result = self.__ls340data.getPID()
+         self.covered("PID?")
 
       elif (command == "CMODE? 1"):
          result = self.__ls340data.getCMODE()
+         self.covered("CMODE?")
 
       elif (command == "TUNEST?"):
          result = self.__ls340data.getTUNEST()
+         self.covered("TUNEST?")
 
       #Set functions
 
       elif (command.startswith("SETP 1,")):
          val = command.split(",")[1]
          self.__ls340data.setSETP(val)
+         self.covered("SETP")
 
       elif (command.startswith("RANGE ")):
          val = command.split(" ")[1]
          self.__ls340data.setRANGE(val)
+         self.covered("RANGE")
 
       elif (command.startswith("RAMP 1")):
          val_onoff = command.split(",")[1]
          val_rate = command.split(",")[2]
          self.__ls340data.setRAMP(val_onoff, val_rate)
+         self.covered("RAMP")
 
       elif (command.startswith("MOUT 1")):
          val = command.split(",")[1]
          self.__ls340data.setMOUT(val)
+         self.covered("MOUT")
 
       elif (command.startswith("PID 1")):
          vals = command.split(",")
          val_p = vals[1]
-         val_i = vals[2]
-         val_d = vals[3]
+         val_i = None
+         val_d = None
+         if (len(vals) > 2):
+            val_i = vals[2]
+         if (len(vals) > 3):
+            val_d = vals[3]
          self.__ls340data.setPID(val_p, val_i, val_d)
+         self.covered("PID_P")
+         if (val_i != None):
+            self.covered("PID_I")
+         if (val_d != None):
+            self.covered("PID_D")
 
       elif (command.startswith("CMODE 1")):
          val = command.split(",")[1]
          self.__ls340data.setCMODE(val)
+         self.covered("CMODE")
 
       else:
-         #Return nothing in the case of a syntax error.
+         #Return nothing in the case of a syntax error (that's what the lakeshore does)
          result = None
          if self.diagnosticLevel() > 0:
             print "ls340::reply. Command not supported by simulation."
 
-      #print "result: " + repr(result)
-      
+      if self.diagnosticLevel() > 0:
+         print "ls340::reply. result: " + repr(command)
         
       return result
 
