@@ -45,5 +45,6 @@ example_sim_LIBS += pyDrv
 # We need to link this IOC Application against the EPICS Base libraries
 example_sim_LIBS += $(EPICS_BASE_IOC_LIBS)
 
+DATA+=exampleGUI
 
 include $(TOP)/configure/RULES
