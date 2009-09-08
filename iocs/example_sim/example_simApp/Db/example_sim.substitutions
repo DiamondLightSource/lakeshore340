@@ -1,0 +1,18 @@
+################################################################
+#
+# Lakeshore 340 Temperature Controller Substitution Example File
+#
+# Macros:
+#   P - Prefix for PV name
+#   PORT - Bus/Port Address (eg. ASYN Port).
+#   ADDR - Address on the bus (optional)
+#   TEMPSCAN - SCAN rate for the temperature/voltage readings
+#   SCAN - SCAN rate for non-temperature/voltage parameters.
+#
+################################################################
+
+file lakeshore340.template
+{
+pattern {P, PORT, ADDR, TEMPSCAN, SCAN}
+        {mp49:ls340sim, L0, 12, .2, 1}
+}
