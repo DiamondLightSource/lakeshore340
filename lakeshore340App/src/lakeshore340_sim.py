@@ -1,4 +1,4 @@
-#!/bin/env python2.4
+#!/dls_sw/tools/bin/python2.4
 
 from pkg_resources import require
 require('dls_serial_sim==1.7')
@@ -59,7 +59,6 @@ class ls340data(object):
       icmode = int(cmode)
       if ((icmode > 0) and (icmode < 7)):
          self.__cmode = icmode
-         print "cmode: " + str(icmode)
 
    def getIDN(self):
       return "LSCI,MODEL340,123456,02032001"
@@ -164,7 +163,7 @@ class ls340(serial_device):
 
       self.__ls340data = ls340data()
 
-      self.__channels = ["1","2","3","4"]
+      self.__channels = ["0","1","2","3"]
         
       return
 
@@ -176,6 +175,8 @@ class ls340(serial_device):
       with a response to the command or None.'''
 
       result = None
+
+      #print "ls340sim::reply: " + repr(command)
       
       if self.diagnosticLevel() > 0:
          print "ls340::reply. command: " + command
@@ -215,7 +216,7 @@ class ls340(serial_device):
       elif (command == "PID? 1"):
          result = self.__ls340data.getPID()
 
-      elif (command == "CMODE?"):
+      elif (command == "CMODE? 1"):
          result = self.__ls340data.getCMODE()
 
       elif (command == "TUNEST?"):
@@ -257,6 +258,7 @@ class ls340(serial_device):
          if self.diagnosticLevel() > 0:
             print "ls340::reply. Command not supported by simulation."
 
+      #print "result: " + repr(result)
       
         
       return result
