@@ -17,6 +17,7 @@ class ls340TestSuite(TestSuite):
              iocDirectory="iocs/example_sim",
              iocBootCmd="bin/linux-x86/stexample_sim.boot",
              epicsDbFiles="db/example_sim.db",
+             simDevices=[SimDevice("controller1", 9001)],
              environment=[('EPICS_CA_REPEATER_PORT','6065'),('EPICS_CA_SERVER_PORT','6064')],
              guiCmds=['edm -m "lakeshore340=mp49:ls340sim" -x data/lakeshore340.edl'])
       
@@ -51,12 +52,12 @@ class ls340CaseGetID(ls340CaseBase):
       '''Read the IDN string.'''
       
       pv = self.getPVBase() + ":ID"
-      print "pv is: " + pv
       
       id = self.getPv(pv)
       
-      print "id is: " + id
-      
+
+
+
 
 
 ################################################
