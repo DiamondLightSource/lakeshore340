@@ -53,7 +53,11 @@ class ls340CaseGetID(ls340CaseBase):
       
       pv = self.getPVBase() + ":ID"
       
-      id = self.getPv(pv)
+      val = self.getPv(pv)
+
+      regex = re.compile('^LSCI,MODEL340,.{6},.{8}')
+      if (not(regex.match(val))):
+         self.fail(str("ID string did not match expected format. Got: " + id))
       
 
 
