@@ -23,6 +23,7 @@ class ls340TestSuite(TestSuite):
       
       # The tests
       ls340CaseGetID(self)
+      ls340CaseSETP(self)
       
       
        
@@ -32,6 +33,10 @@ class ls340TestSuite(TestSuite):
 
 
 class ls340CaseBase(TestCase):
+   """
+   Base class for all lakeshore340 test cases.
+   This is where the base PV is hardcoded to be 'mp49:ls340sim'
+   """
    
    def __init__(self, A):
       TestCase.__init__(self, A)
@@ -47,9 +52,12 @@ class ls340CaseBase(TestCase):
 
 
 class ls340CaseGetID(ls340CaseBase):
+   """
+   Test case to read the ID string.
+   The test just checks that the string is in the correct format.
+   """
    
    def runTest(self):
-      '''Read the IDN string.'''
       
       pv = self.getPVBase() + ":ID"
       
@@ -57,9 +65,25 @@ class ls340CaseGetID(ls340CaseBase):
 
       regex = re.compile('^LSCI,MODEL340,.{6},.{8}')
       if (not(regex.match(val))):
-         self.fail(str("ID string did not match expected format. Got: " + id))
-      
+         self.fail(str("ID string did not match expected format. Got: " + val))
 
+      
+class ls340CaseSETP(ls340CaseBase):
+   """
+   Test case to set and read the SETP PV.
+   It does not check that the readback is correct (don't know what range to check..)
+   """
+
+   def runTest(self):
+      pv = self.getPVBase() + ":SETP"
+      pvSet = pv + "_S"
+
+      self.putPv(pvSet, 23)
+      val = self.getPv(pv)
+      #Couple more puts to check it still works
+      self.putPv(pvSet, 0)
+      self.putPv(pvSet, 100)
+   
 
 
 
