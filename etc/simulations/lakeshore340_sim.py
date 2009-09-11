@@ -1,7 +1,7 @@
 #!/dls_sw/tools/bin/python2.4
 
 from pkg_resources import require
-require('dls_serial_sim==1.7')
+require('dls_serial_sim==1.8')
 from dls_serial_sim import serial_device
 import re, os
 

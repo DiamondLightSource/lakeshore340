@@ -6,7 +6,7 @@ from pkg_resources import require
 require('dls.autotestframework')
 from dls.autotestframework import *
 
-from cases import *
+from ls340cases import *
 import pyclbr
 
 ################################################
@@ -15,19 +15,19 @@ import pyclbr
 class ls340TestSuite(TestSuite):
 
    def loadCasePlugins(self):
-      classes = pyclbr.readmodule("cases")
+      classes = pyclbr.readmodule("ls340cases")
       for c in classes:
          if not (c.endswith("Base")):
             classobj = eval(c)
-            classinstance = classobj(self)
-         
-
+            if (issubclass(classobj, TestCase)):
+               if not (classobj == TestCase):
+                  classinstance = classobj(self)
    
    def createTests(self):
       # Define the targets for this test suite
       Target("simulation", self,
              iocDirectory="iocs/example_sim",
-             iocBootCmd="bin/linux-x86/stexample_sim.boot",
+             iocBootCmd="screen -D -m -L bin/linux-x86/stexample_sim.boot",
              epicsDbFiles="db/example_sim.db",
              simDevices=[SimDevice("controller1", 9001)],
              environment=[('EPICS_CA_REPEATER_PORT','6065'),('EPICS_CA_SERVER_PORT','6064')],
