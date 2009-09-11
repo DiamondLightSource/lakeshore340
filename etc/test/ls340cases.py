@@ -1,3 +1,5 @@
+#!/dls_sw/tools/bin/python2.4
+
 from pkg_resources import require
 require('dls.autotestframework')
 from dls.autotestframework import TestCase
@@ -63,3 +65,17 @@ class ls340CaseSETP(ls340CaseBase):
       self.putPv(pvSet, 100)
       self.putPv(pvSet, 350)
       self.putPv(pvSet, 20)
+
+class ls340CaseKRDG(ls340CaseBase):
+   """
+   Test case to read the temperature PVs.
+   The test just reads the PVs.
+   """
+
+   def runTest(self):
+      for i in range(0,4):
+         pv = self.getPVBase() + ":KRDG" + str(i)
+         print pv
+         self.getPv(pv)
+
+      
