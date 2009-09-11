@@ -1,6 +1,8 @@
 from pkg_resources import require
 require('dls.autotestframework')
-from dls.autotestframework import *
+from dls.autotestframework import TestCase
+
+import re
 
 class ls340CaseBase(TestCase):
    """
