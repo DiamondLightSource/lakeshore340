@@ -98,5 +98,37 @@ class ls340CaseRANGE(ls340CaseBase):
          self.putPv(pvSet, i)
          #self.sleep(2)
          self.verifyPv(pv, i)
+
+
+class ls340CaseRAMP(ls340CaseBase):
+   """
+   Test case to set and read the RAMP PV a few times.
+   It checks that the set works and the corressponding readback
+   is the same value.
+   """
+
+   def runTest(self):
+      pv = self.getPVBase() + ":RAMP"
+      pvSet = pv + "_S"
+
+      self.putPv(pvSet, 0)
+      #self.sleep(2)
+      self.verifyPv(pv, 0)
+
+      self.putPv(pvSet, 1)
+      #self.sleep(2)
+      self.verifyPv(pv, 1)
+
+      self.putPv(pvSet, 10)
+      #self.sleep(2)
+      self.verifyPv(pv, 10)
+
+      self.putPv(pvSet, -10)
+      #self.sleep(2)
+      self.verifyPv(pv, -10)
+
+      self.putPv(pvSet, 12.5)
+      #self.sleep(2)
+      self.verifyPv(pv, 12.5)
          
 
