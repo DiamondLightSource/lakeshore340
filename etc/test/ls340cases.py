@@ -68,14 +68,35 @@ class ls340CaseSETP(ls340CaseBase):
 
 class ls340CaseKRDG(ls340CaseBase):
    """
-   Test case to read the temperature PVs.
+   Test case to read the temperature PVs and voltage PVs.
    The test just reads the PVs.
    """
 
    def runTest(self):
       for i in range(0,4):
          pv = self.getPVBase() + ":KRDG" + str(i)
-         print pv
          self.getPv(pv)
 
-      
+      for i in range(0,4):
+         pv = self.getPVBase() + ":SRDG" + str(i)
+         self.getPv(pv)
+
+
+
+class ls340CaseRANGE(ls340CaseBase):
+   """
+   Test case to set and read the RANGE PV.
+   It checks that the readback corresponds to what was set.
+   The RANGE has a valid range of (0, 1, 2, 3, 4, 5)
+   """
+
+   def runTest(self):
+      pv = self.getPVBase() + ":RANGE"
+      pvSet = pv + "_S"
+
+      for i in range(0,6):
+         self.putPv(pvSet, i)
+         #self.sleep(2)
+         self.verifyPv(pv, i)
+         
+

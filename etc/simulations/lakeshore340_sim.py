@@ -78,7 +78,7 @@ class ls340data(object):
       return self.returnTempTypeString()
 
    def getRANGE(self):
-      return str(randrange(0, 6, 1))
+      return self.__range
 
    def getRAMP(self):
       rand1 = randrange(0, 2, 1)
