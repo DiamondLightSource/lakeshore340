@@ -66,7 +66,7 @@ class ls340data(object):
       return "LSCI,MODEL340,123456,02032001"
 
    def getHTR(self):
-      return self.returnRateTypeString()
+      return self.returnRateTypeString(0.0)
 
    def getSETP(self):
       return self.returnTempTypeString()
@@ -82,10 +82,10 @@ class ls340data(object):
 
    def getRAMP(self):
       rand1 = randrange(0, 2, 1)
-      return str(rand1) + "," + self.returnRateTypeString()
+      return str(rand1) + "," + self.returnRateTypeString(self.__ramprate)
 
    def getMOUT(self):
-      return self.returnRateTypeString()
+      return self.returnRateTypeString(0.0)
 
    def getPID(self):
       rand1 = randrange(0, 1001, 1)
@@ -110,19 +110,29 @@ class ls340data(object):
       rand1 = randrange(0, 2, 1)
       return str(rand1)
 
-   def returnRateTypeString(self):
+   def returnRateTypeString(self, val):
       """
-      Returns a string random number in this format: 000.0
+      Returns a string number in this format: 000.0
       """
-      rand1 = randrange(0, 101, 1)
-      rand2 = randrange(0, 10, 1)
-      if (rand1 == 100):
-         rand2 = 0
-         
-      strrand1 = str(rand1)
-      strrand2 = str(rand2)
-      
-      return strrand1 + "." + strrand2
+
+      result = None
+      sign = 0;
+
+      if (val < 0):
+         val = abs(val)
+         sign = 1;
+
+      if (val <= 9.9):
+         result = "00" + str(val)
+      elif ((val <= 99.9) and (val >= 10.0)):
+         result = "0" + str(val)
+      elif (val >= 100.0):
+         result = str(val)
+
+      if (sign == 1):
+         result = "-" + result
+
+      return result
 
    
 
@@ -288,6 +298,7 @@ class ls340(serial_device):
          print "ls340::reply. result: " + repr(command)
         
       return result
+
 
    def isChannelNumberOK(self, channel):
       """

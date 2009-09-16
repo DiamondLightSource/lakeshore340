@@ -96,7 +96,6 @@ class ls340CaseRANGE(ls340CaseBase):
 
       for i in range(0,6):
          self.putPv(pvSet, i)
-         #self.sleep(2)
          self.verifyPv(pv, i)
 
 
@@ -112,23 +111,33 @@ class ls340CaseRAMP(ls340CaseBase):
       pvSet = pv + "_S"
 
       self.putPv(pvSet, 0)
-      #self.sleep(2)
       self.verifyPv(pv, 0)
 
       self.putPv(pvSet, 1)
-      #self.sleep(2)
       self.verifyPv(pv, 1)
 
       self.putPv(pvSet, 10)
-      #self.sleep(2)
       self.verifyPv(pv, 10)
 
+      self.putPv(pvSet, 12.5)
+      self.verifyPv(pv, 12.5)
+
       self.putPv(pvSet, -10)
-      #self.sleep(2)
       self.verifyPv(pv, -10)
 
-      self.putPv(pvSet, 12.5)
-      #self.sleep(2)
-      self.verifyPv(pv, 12.5)
+      self.putPv(pvSet, -10.1)
+      self.verifyPv(pv, -10.1)
+
+      self.putPv(pvSet, 101)
+      self.verifyPv(pv, 101)
+
+      self.putPv(pvSet, 102.3)
+      self.verifyPv(pv, 102.3)
+
+      self.putPv(pvSet, -100.5)
+      self.verifyPv(pv, -100.5)
+
+
+
          
 
