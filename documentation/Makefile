@@ -12,13 +12,13 @@ $(USERGUIDE_FOLDER)/html/images/%.png : images/%.png
 	cp $< $@
 
 
-$(USERGUIDE_FOLDER)/html/t1.html:  $(USERGUIDE_FOLDER)/html UserGuide.xml 
-	docbook2html -o $(USERGUIDE_FOLDER)/html UserGuide.xml
+#$(USERGUIDE_FOLDER)/html/t1.html:  $(USERGUIDE_FOLDER)/html UserGuide.xml 
+#	docbook2html -o $(USERGUIDE_FOLDER)/html UserGuide.xml
 
 $(PROGGUIDE_FOLDER)/html/index.html: ProgrammerGuide.cfg
 	doxygen $<
 
-install docs: $(PROGGUIDE_FOLDER)/html/index.html $(USERGUIDE_FOLDER)/html/t1.html  $(USERGUIDE_FOLDER)/html $(USERGUIDE_FOLDER)/html/images $(IMAGES_TARGET)
+install docs: $(PROGGUIDE_FOLDER)/html/index.html  $(USERGUIDE_FOLDER)/html $(USERGUIDE_FOLDER)/html/images $(IMAGES_TARGET)
 
 uninstall clean:
 	-if test -e $(PROGGUIDE_FOLDER);  then rm -r $(PROGGUIDE_FOLDER); fi
