@@ -25,7 +25,8 @@ class ls340TestSuite(TestSuite):
    
    def createTests(self):
       # Define the targets for this test suite
-      Target("simulation", self,
+      # Rename 'dev' to be 'simulation' when the database has been fixed so that the tests work.
+      Target("dev", self,
              iocDirectory="iocs/example_sim",
              iocBootCmd="screen -D -m -L bin/linux-x86/stexample_sim.boot",
              epicsDbFiles="db/example_sim.db",
