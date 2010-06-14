@@ -3,8 +3,8 @@ beginScreenProperties
 major 4
 minor 0
 release 1
-x 1987
-y 633
+x 50
+y 50
 w 826
 h 467
 font "arial-medium-r-18.0"
@@ -344,7 +344,7 @@ release 0
 x 420
 y 285
 w 400
-h 95
+h 130
 lineColor index 14
 fill
 fillColor index 5
@@ -1271,5 +1271,62 @@ controlPv "$(lakeshore340):DISABLE"
 3d
 font "arial-bold-r-14.0"
 objType "controls"
+endObjectProperties
+
+# (Textupdate)
+object TextupdateClass
+beginObjectProperties
+major 10
+minor 0
+release 0
+x 540
+y 375
+w 135
+h 35
+controlPv "$(lakeshore340):AOUT1"
+fgColor index 16
+fgAlarm
+bgColor index 10
+fill
+font "arial-bold-r-14.0"
+endObjectProperties
+
+# (Textupdate)
+object TextupdateClass
+beginObjectProperties
+major 10
+minor 0
+release 0
+x 680
+y 375
+w 135
+h 35
+controlPv "$(lakeshore340):AOUT2"
+fgColor index 16
+fgAlarm
+bgColor index 10
+fill
+font "arial-bold-r-14.0"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 430
+y 375
+w 110
+h 45
+font "arial-bold-r-14.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Analogue "
+  "out 1, 2"
+}
 endObjectProperties
 

@@ -56,7 +56,7 @@ record(ai, "$(P):HTR") {
 record(ai, "$(P):SETP") {
   field(DTYP, "stream")
   field(SDIS, "$(P):DISABLE")
-  field(INP, "@lakeshore340.proto getSETP $(PORT) $(ADDR)")
+  field(INP, "@lakeshore340.proto getSETP($(LOOP=1)) $(PORT) $(ADDR)")
   field(SCAN, "$(SCAN) second")
   field(PREC, 3)
   field(EGU, "K")
@@ -194,7 +194,7 @@ record(ai, "$(P):RANGE") {
 record(ai, "$(P):RAMP") {
   field(DTYP, "stream")
   field(SDIS, "$(P):DISABLE")
-  field(INP, "@lakeshore340.proto getRAMP $(PORT) $(ADDR)")
+  field(INP, "@lakeshore340.proto getRAMP($(LOOP=1)) $(PORT) $(ADDR)")
   field(SCAN, "$(SCAN) second")
   field(PREC, 3)
   field(EGU, "K/min")  
@@ -209,7 +209,7 @@ record(ai, "$(P):RAMP") {
 record(ai, "$(P):RAMPST") {
   field(DTYP, "stream")
   field(SDIS, "$(P):DISABLE")
-  field(INP, "@lakeshore340.proto getRAMPSTATUS $(PORT) $(ADDR)")
+  field(INP, "@lakeshore340.proto getRAMPSTATUS($(LOOP=1)) $(PORT) $(ADDR)")
   field(SCAN, "$(SCAN) second")
 }
 
@@ -219,7 +219,7 @@ record(ai, "$(P):RAMPST") {
 record(ai, "$(P):MOUT") {
   field(DTYP, "stream")
   field(SDIS, "$(P):DISABLE")
-  field(INP, "@lakeshore340.proto getMOUT $(PORT) $(ADDR)")
+  field(INP, "@lakeshore340.proto getMOUT($(LOOP=1)) $(PORT) $(ADDR)")
   field(SCAN, "$(SCAN) second")
 }
 
@@ -229,7 +229,7 @@ record(ai, "$(P):MOUT") {
 record(ai, "$(P):P") {
   field(DTYP, "stream")
   field(SDIS, "$(P):DISABLE")
-  field(INP, "@lakeshore340.proto getP $(PORT) $(ADDR)")
+  field(INP, "@lakeshore340.proto getP($(LOOP=1)) $(PORT) $(ADDR)")
   field(SCAN, "$(SCAN) second")
 }
 
@@ -239,7 +239,7 @@ record(ai, "$(P):P") {
 record(ai, "$(P):I") {
   field(DTYP, "stream")
   field(SDIS, "$(P):DISABLE")
-  field(INP, "@lakeshore340.proto getI $(PORT) $(ADDR)")
+  field(INP, "@lakeshore340.proto getI($(LOOP=1)) $(PORT) $(ADDR)")
   field(SCAN, "$(SCAN) second")
 }
 
@@ -249,7 +249,7 @@ record(ai, "$(P):I") {
 record(ai, "$(P):D") {
   field(DTYP, "stream")
   field(SDIS, "$(P):DISABLE")
-  field(INP, "@lakeshore340.proto getD $(PORT) $(ADDR)")
+  field(INP, "@lakeshore340.proto getD($(LOOP=1)) $(PORT) $(ADDR)")
   field(SCAN, "$(SCAN) second")
 }
 
@@ -259,7 +259,7 @@ record(ai, "$(P):D") {
 record(ai, "$(P):CMODE") {
   field(DTYP, "stream")
   field(SDIS, "$(P):DISABLE")
-  field(INP, "@lakeshore340.proto getCMODE $(PORT) $(ADDR)")
+  field(INP, "@lakeshore340.proto getCMODE($(LOOP=1)) $(PORT) $(ADDR)")
   field(SCAN, "$(SCAN) second")
 }
 
@@ -274,6 +274,29 @@ record(ai, "$(P):TUNEST") {
   field(SCAN, "$(SCAN) second")
 }
 
+# ///
+# /// Read the analogue output 1
+# ///
+record(ai, "$(P):AOUT1") {
+  field(DTYP, "stream")
+  field(SDIS, "$(P):DISABLE")
+  field(INP, "@lakeshore340.proto getAOUT(1) $(PORT) $(ADDR)")
+  field(SCAN, "$(SCAN) second")
+  field(EGU, "%")  
+}
+
+# ///
+# /// Read the analogue output 2
+# ///
+record(ai, "$(P):AOUT2") {
+  field(DTYP, "stream")
+  field(SDIS, "$(P):DISABLE")
+  field(INP, "@lakeshore340.proto getAOUT(2) $(PORT) $(ADDR)")
+  field(SCAN, "$(SCAN) second")
+  field(EGU, "%")
+}
+
+
 ################################################################
 # Write records
 ################################################################
@@ -287,7 +310,7 @@ record(ao, "$(P):SETP_S") {
   field(DTYP, "stream")
   field(SDIS, "$(P):DISABLE")
   field(DESC, "Setpoint temperature")
-  field(OUT, "@lakeshore340.proto setSETP $(PORT) $(ADDR)")
+  field(OUT, "@lakeshore340.proto setSETP($(LOOP=1)) $(PORT) $(ADDR)")
   field(PREC, 3)
   field(FLNK, "$(P):SETP")
   field(EGU, "K")
@@ -322,7 +345,7 @@ record(ao, "$(P):RANGE_S") {
 record(ao, "$(P):RAMP_S") {
   field(DTYP, "stream")
   field(SDIS, "$(P):DISABLE")
-  field(OUT, "@lakeshore340.proto setRAMP($(P):RAMPST) $(PORT) $(ADDR)")
+  field(OUT, "@lakeshore340.proto setRAMP($(P):RAMPST,$(LOOP=1)) $(PORT) $(ADDR)")
   field(PREC, 3)
   field(FLNK, "$(P):RAMP")
   field(EGU, "K/min")
@@ -344,7 +367,7 @@ record(ao, "$(P):RAMP_S") {
 record(ao, "$(P):RAMPST_S") {
   field(DTYP, "stream")
   field(SDIS, "$(P):DISABLE")
-  field(OUT, "@lakeshore340.proto setRAMPSTATUS($(P):RAMP) $(PORT) $(ADDR)")
+  field(OUT, "@lakeshore340.proto setRAMPSTATUS($(P):RAMP,$(LOOP=1)) $(PORT) $(ADDR)")
   field(FLNK, "$(P):RAMPST")
 }
 
@@ -355,7 +378,7 @@ record(ao, "$(P):RAMPST_S") {
 record(ao, "$(P):MOUT_S") {
   field(DTYP, "stream")
   field(SDIS, "$(P):DISABLE")
-  field(OUT, "@lakeshore340.proto setMOUT $(PORT) $(ADDR)")
+  field(OUT, "@lakeshore340.proto setMOUT($(LOOP=1)) $(PORT) $(ADDR)")
   field(FLNK, "$(P):MOUT")
 }
 
@@ -366,7 +389,7 @@ record(ao, "$(P):MOUT_S") {
 record(ao, "$(P):P_S") {
   field(DTYP, "stream")
   field(SDIS, "$(P):DISABLE")
-  field(OUT, "@lakeshore340.proto setP $(PORT) $(ADDR)")
+  field(OUT, "@lakeshore340.proto setP($(LOOP=1)) $(PORT) $(ADDR)")
   field(FLNK, "$(P):P")
 }
 
@@ -377,7 +400,7 @@ record(ao, "$(P):P_S") {
 record(ao, "$(P):I_S") {
   field(DTYP, "stream")
   field(SDIS, "$(P):DISABLE")
-  field(OUT, "@lakeshore340.proto setI($(P):P) $(PORT) $(ADDR)")
+  field(OUT, "@lakeshore340.proto setI($(P):P,$(LOOP=1)) $(PORT) $(ADDR)")
   field(FLNK, "$(P):I")
 }
 
@@ -388,7 +411,7 @@ record(ao, "$(P):I_S") {
 record(ao, "$(P):D_S") {
   field(DTYP, "stream")
   field(SDIS, "$(P):DISABLE")
-  field(OUT, "@lakeshore340.proto setD($(P):P,$(P):I) $(PORT) $(ADDR)")
+  field(OUT, "@lakeshore340.proto setD($(P):P,$(P):I,$(LOOP=1)) $(PORT) $(ADDR)")
   field(FLNK, "$(P):D")
 }
 
@@ -399,6 +422,6 @@ record(ao, "$(P):D_S") {
 record(ao, "$(P):CMODE_S") {
   field(DTYP, "stream")
   field(SDIS, "$(P):DISABLE")
-  field(OUT, "@lakeshore340.proto setCMODE $(PORT) $(ADDR)")
+  field(OUT, "@lakeshore340.proto setCMODE($(LOOP=1)) $(PORT) $(ADDR)")
   field(FLNK, "$(P):CMODE")
 }
