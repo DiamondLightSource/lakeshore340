@@ -1235,9 +1235,9 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 520
+x 580
 y 435
-w 200
+w 140
 h 25
 font "arial-bold-r-14.0"
 fontAlign "center"
@@ -1257,9 +1257,9 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 420
+x 490
 y 435
-w 95
+w 85
 h 25
 fgColor index 25
 onColor index 20
@@ -1327,6 +1327,28 @@ useDisplayBg
 value {
   "Analogue "
   "out 1, 2"
+}
+endObjectProperties
+
+# (Shell Command)
+object shellCmdClass
+beginObjectProperties
+major 4
+minor 2
+release 0
+x 420
+y 435
+w 65
+h 25
+fgColor index 43
+bgColor index 3
+topShadowColor index 1
+botShadowColor index 11
+font "arial-bold-r-14.0"
+buttonLabel "Asyn"
+numCmds 1
+command {
+  0 "cd /dls_sw/prod/R3.14.8.2/support/asyn/4-9/medm;  medm -x -macro \"P=$(lakeshore340):,R=ASYN\" asynRecord.adl"
 }
 endObjectProperties
 

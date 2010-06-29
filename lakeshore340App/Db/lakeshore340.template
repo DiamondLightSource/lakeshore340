@@ -425,3 +425,16 @@ record(ao, "$(P):CMODE_S") {
   field(OUT, "@lakeshore340.proto setCMODE($(LOOP=1)) $(PORT) $(ADDR)")
   field(FLNK, "$(P):CMODE")
 }
+
+
+# ///
+# /// Generic Asyn record for reading parameters.
+# ///
+record(asyn,"$(P):ASYN")
+{
+    field(DTYP,"asynRecordDevice")
+    field(PORT,"$(PORT)")
+    field(ADDR,"$(ADDR)")
+    field(OMAX,"1024")
+    field(IMAX,"1024")
+}
