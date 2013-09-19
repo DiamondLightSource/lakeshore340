@@ -231,6 +231,9 @@ record(ai, "$(P):P") {
   field(SDIS, "$(P):DISABLE")
   field(INP, "@lakeshore340.proto getP($(LOOP=1)) $(PORT) $(ADDR)")
   field(SCAN, "$(SCAN) second")
+  field(PREC, "1")
+  field(LOPR, "0")
+  field(HOPR, "1000")
 }
 
 # /// 
@@ -241,6 +244,7 @@ record(ai, "$(P):I") {
   field(SDIS, "$(P):DISABLE")
   field(INP, "@lakeshore340.proto getI($(LOOP=1)) $(PORT) $(ADDR)")
   field(SCAN, "$(SCAN) second")
+  field(PREC, "1")
 }
 
 # /// 
@@ -251,6 +255,7 @@ record(ai, "$(P):D") {
   field(SDIS, "$(P):DISABLE")
   field(INP, "@lakeshore340.proto getD($(LOOP=1)) $(PORT) $(ADDR)")
   field(SCAN, "$(SCAN) second")
+  field(PREC, "0")
 }
 
 # /// 
@@ -382,6 +387,17 @@ record(ao, "$(P):MOUT_S") {
   field(FLNK, "$(P):MOUT")
 }
 
+# Extracts from p. 6-4 (70th page)
+#
+# Lakeshore 340 Manual
+# Rev 3-3 14 May 2009
+#
+# 6.6.1 Proportional (P)
+#
+# The proportional parameter (also called gain) is the P part of the
+# PID control equation.  It has a range of 0 to 1000 with a resolution
+# of 0.1. Enter a value greater than zero for P to use closed loop
+# control.
 # ///
 # /// Set the PID P parameter for control loop 1.
 # ///
@@ -391,8 +407,20 @@ record(ao, "$(P):P_S") {
   field(SDIS, "$(P):DISABLE")
   field(OUT, "@lakeshore340.proto setP($(LOOP=1)) $(PORT) $(ADDR)")
   field(FLNK, "$(P):P")
+  field(PREC, "1")
+  field(LOPR, "0")
+  field(HOPR, "1000")
 }
 
+# 6.6.2 Integral (I)
+#
+# The integral parameter (also called reset) is the I part of the PID
+# control equation.  It has a range of 0 to 1000 with a resolution of
+# 0.1. Setting I to zero turns the reset function off.  The I setting
+# is related to seconds by:
+#
+# Isetting=1000/Iseconds
+#
 # ///
 # /// Set the PID I parameter for control loop 1.
 # ///
@@ -402,8 +430,17 @@ record(ao, "$(P):I_S") {
   field(SDIS, "$(P):DISABLE")
   field(OUT, "@lakeshore340.proto setI($(P):P,$(LOOP=1)) $(PORT) $(ADDR)")
   field(FLNK, "$(P):I")
+  field(PREC, "1")
+  field(LOPR, "0")
+  field(HOPR, "1000")
 }
 
+# 6.6.3 Derivative (D)
+#
+# The derivative parameter (sometimes called rate) is the D part of
+# the PID control equation.  The range of the D setting is 0 to 1000
+# seconds with a resolution of 1 second.  Setting D to zero turns the
+# derivative function off.
 # ///
 # /// Set the PID D parameter for control loop 1.
 # ///
@@ -413,6 +450,9 @@ record(ao, "$(P):D_S") {
   field(SDIS, "$(P):DISABLE")
   field(OUT, "@lakeshore340.proto setD($(P):P,$(P):I,$(LOOP=1)) $(PORT) $(ADDR)")
   field(FLNK, "$(P):D")
+  field(PREC, "0")
+  field(LOPR, "0")
+  field(HOPR, "1000")
 }
 
 # /// 
@@ -425,7 +465,6 @@ record(ao, "$(P):CMODE_S") {
   field(OUT, "@lakeshore340.proto setCMODE($(LOOP=1)) $(PORT) $(ADDR)")
   field(FLNK, "$(P):CMODE")
 }
-
 
 # ///
 # /// Generic Asyn record for reading parameters.
