@@ -3,8 +3,8 @@ beginScreenProperties
 major 4
 minor 0
 release 1
-x 50
-y 50
+x 910
+y 461
 w 826
 h 467
 font "arial-medium-r-18.0"
@@ -1330,8 +1330,8 @@ value {
 }
 endObjectProperties
 
-# (Shell Command)
-object shellCmdClass
+# (Related Display)
+object relatedDisplayClass
 beginObjectProperties
 major 4
 minor 2
@@ -1346,9 +1346,13 @@ topShadowColor index 1
 botShadowColor index 11
 font "arial-bold-r-14.0"
 buttonLabel "Asyn"
-numCmds 1
-command {
-  0 "cd /dls_sw/prod/R3.14.8.2/support/asyn/4-9/medm;  medm -x -macro \"P=$(lakeshore340):,R=ASYN\" asynRecord.adl"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "aysnRecord.edl"
+}
+symbols {
+  0 "P=$(lakeshore340),R=:ASYN"
 }
 endObjectProperties
 
