@@ -1,0 +1,5 @@
+<?xml version="1.0" ?>
+<components arch="linux-x86">
+	<asyn.AsynIP name="lakeshore340Asyn" port="172.23.111.180:7001" simulation="localhost:9001"/>
+	<lakeshore340.lakeshore340 ADDR="12" P="TESTLAKESHORE" PORT="lakeshore340Asyn" SCAN="2" TEMPSCAN=".5"/>
+</components>

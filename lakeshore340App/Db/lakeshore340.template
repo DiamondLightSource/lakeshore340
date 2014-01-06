@@ -1,18 +1,23 @@
 ################################################################
 #
-# Lakeshore 340 Temperature Controller template file.
+# % macro, __doc__, Lakeshore 340 Temperature Controller
+# Notes: The temperatures in Kelvin are archived once every 10 secs.
 #
 # Macros:
-#   P - Prefix for PV name
-#   PORT - Bus/Port Address (eg. ASYN Port).
-#   ADDR - Address on the bus (optional)
-#   TEMPSCAN - SCAN rate for the temperature/voltage readings
-#   SCAN - SCAN rate for non-temperature/voltage parameters.
-#
-# Notes: The temperatures in Kelvin are archived once every 10 secs.
+# % macro, P, Prefix for PV name
+# % macro, PORT, Bus/Port Address (eg. ASYN Port).
+# % macro, ADDR, Address on the bus
+# % macro, SCAN, SCAN rate for non-temperature/voltage parameters.
+# % macro, TEMPSCAN, SCAN rate for the temperature/voltage readings
+# % macro, name, Object and gui association name
+# % macro, gda_name, Name in gda interface file (Default = )
+# % macro, gda_desc, Description in gda interface file (Default = )
+# % macro, LOOP, Which heater PID loop to control (Default = 1)
 #
 ################################################################
 
+#% gui, $(name=), edm, lakeshore340.edl, lakeshore340=$(P)
+#% gui, $(name=), edmembed, lakeshore340_embed.edl, P=$(P),Q=''
 #% gdatag,template,lakeshore340,$(gda_name=),$(gda_desc=)
 # % gdatag,binary,rw,$(gda_name=),DISABLE
 record(bo, "$(P):DISABLE") {
@@ -69,6 +74,7 @@ record(ai, "$(P):SETP") {
 #% gdatag,pv,ro,$(gda_name=),KRDG0
 #% archiver 10 Monitor
 #% alh 
+#% gui, $(name=), sevr
 record(ai, "$(P):KRDG0") {
   field(DTYP, "stream")
   field(SDIS, "$(P):DISABLE")
@@ -477,3 +483,4 @@ record(asyn,"$(P):ASYN")
     field(OMAX,"1024")
     field(IMAX,"1024")
 }
+
