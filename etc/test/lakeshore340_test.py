@@ -11,18 +11,18 @@ import pyclbr
 
 ################################################
 # Test suite for the lakeshore340 temperature controller.
-    
+
 class ls340TestSuite(TestSuite):
 
-   def loadCasePlugins(self):
+   def loadCasePlugins(self, testclasses):
       classes = pyclbr.readmodule("ls340cases")
       for c in classes:
          if not (c.endswith("Base")):
             classobj = eval(c)
             if (issubclass(classobj, TestCase)):
                if not (classobj == TestCase):
-                  classinstance = classobj(self)
-   
+                  testclasses.append(classobj)
+
    def createTests(self):
       # Define the targets for this test suite
       # Rename 'dev' to be 'simulation' when the database has been fixed so that the tests work.
@@ -33,9 +33,11 @@ class ls340TestSuite(TestSuite):
              simDevices=[SimDevice("controller1", 9001)],
              guiCmds=['edm -m "lakeshore340=mp49:ls340sim" -x data/lakeshore340.edl'])
 
-      self.loadCasePlugins()
-      
-     
+      testclasses = []
+      self.loadCasePlugins(testclasses)
+      for testclass in testclasses:
+         testclass(self)
+
 
 
 ################################################

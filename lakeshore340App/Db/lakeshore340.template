@@ -17,7 +17,7 @@
 ################################################################
 
 #% gui, $(name=), edm, lakeshore340.edl, lakeshore340=$(P)
-#% gui, $(name=), edmembed, lakeshore340_embed.edl, P=$(P),Q=''
+#% gui, $(name=), edmembed, lakeshore340_embed.edl, P=$(P),Q=
 #% gdatag,template,lakeshore340,$(gda_name=),$(gda_desc=)
 # % gdatag,binary,rw,$(gda_name=),DISABLE
 record(bo, "$(P):DISABLE") {
