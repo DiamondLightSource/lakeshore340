@@ -3,8 +3,8 @@ beginScreenProperties
 major 4
 minor 0
 release 1
-x 910
-y 461
+x 915
+y 487
 w 826
 h 467
 font "arial-medium-r-18.0"
@@ -99,7 +99,7 @@ object activeXTextClass
 beginObjectProperties
 major 4
 minor 1
-release 0
+release 1
 x 20
 y 3
 w 810
@@ -222,7 +222,7 @@ object activeXTextClass
 beginObjectProperties
 major 4
 minor 1
-release 0
+release 1
 x 0
 y 0
 w 50
@@ -263,11 +263,11 @@ object activeXTextClass
 beginObjectProperties
 major 4
 minor 1
-release 0
+release 1
 x 5
 y 40
 w 101
-h 14
+h 13
 font "arial-medium-r-12.0"
 fontAlign "center"
 fgColor index 14
@@ -299,11 +299,11 @@ object activeXTextClass
 beginObjectProperties
 major 4
 minor 1
-release 0
+release 1
 x 5
 y 235
 w 114
-h 14
+h 13
 font "arial-medium-r-12.0"
 fontAlign "center"
 fgColor index 14
@@ -320,7 +320,7 @@ object activeXTextClass
 beginObjectProperties
 major 4
 minor 1
-release 0
+release 1
 x 5
 y 255
 w 130
@@ -355,11 +355,11 @@ object activeXTextClass
 beginObjectProperties
 major 4
 minor 1
-release 0
+release 1
 x 420
 y 275
 w 51
-h 14
+h 13
 font "arial-medium-r-12.0"
 fontAlign "center"
 fgColor index 14
@@ -376,7 +376,7 @@ object activeXTextClass
 beginObjectProperties
 major 4
 minor 1
-release 0
+release 1
 x 425
 y 290
 w 110
@@ -415,7 +415,7 @@ object activeXTextClass
 beginObjectProperties
 major 4
 minor 1
-release 0
+release 1
 x 5
 y 55
 w 130
@@ -435,7 +435,7 @@ object activeXTextClass
 beginObjectProperties
 major 4
 minor 1
-release 0
+release 1
 x 5
 y 95
 w 130
@@ -508,7 +508,7 @@ object activeXTextClass
 beginObjectProperties
 major 4
 minor 1
-release 0
+release 1
 x 5
 y 295
 w 130
@@ -583,7 +583,7 @@ object activeXTextClass
 beginObjectProperties
 major 4
 minor 1
-release 0
+release 1
 x 5
 y 135
 w 130
@@ -638,7 +638,7 @@ object activeXTextClass
 beginObjectProperties
 major 4
 minor 1
-release 0
+release 1
 x 5
 y 175
 w 130
@@ -726,11 +726,11 @@ object activeXTextClass
 beginObjectProperties
 major 4
 minor 1
-release 0
+release 1
 x 420
 y 40
 w 76
-h 14
+h 13
 font "arial-medium-r-12.0"
 fontAlign "center"
 fgColor index 14
@@ -747,7 +747,7 @@ object activeXTextClass
 beginObjectProperties
 major 4
 minor 1
-release 0
+release 1
 x 420
 y 95
 w 130
@@ -767,7 +767,7 @@ object activeXTextClass
 beginObjectProperties
 major 4
 minor 1
-release 0
+release 1
 x 420
 y 135
 w 130
@@ -840,7 +840,7 @@ object activeXTextClass
 beginObjectProperties
 major 4
 minor 1
-release 0
+release 1
 x 420
 y 175
 w 130
@@ -895,7 +895,7 @@ object activeXTextClass
 beginObjectProperties
 major 4
 minor 1
-release 0
+release 1
 x 420
 y 215
 w 130
@@ -950,7 +950,7 @@ object activeXTextClass
 beginObjectProperties
 major 4
 minor 1
-release 0
+release 1
 x 420
 y 55
 w 130
@@ -1132,7 +1132,7 @@ object activeXTextClass
 beginObjectProperties
 major 4
 minor 1
-release 0
+release 1
 x 430
 y 335
 w 110
@@ -1171,7 +1171,7 @@ object activeXTextClass
 beginObjectProperties
 major 4
 minor 1
-release 0
+release 1
 x 5
 y 335
 w 130
@@ -1192,7 +1192,7 @@ object activeXTextClass
 beginObjectProperties
 major 4
 minor 1
-release 0
+release 1
 x 5
 y 375
 w 130
@@ -1213,7 +1213,7 @@ object activeXTextClass
 beginObjectProperties
 major 4
 minor 1
-release 0
+release 1
 x 5
 y 415
 w 130
@@ -1234,7 +1234,7 @@ object activeXTextClass
 beginObjectProperties
 major 4
 minor 1
-release 0
+release 1
 x 580
 y 435
 w 140
@@ -1255,7 +1255,7 @@ endObjectProperties
 object activeButtonClass
 beginObjectProperties
 major 4
-minor 0
+minor 1
 release 0
 x 490
 y 435
@@ -1314,7 +1314,7 @@ object activeXTextClass
 beginObjectProperties
 major 4
 minor 1
-release 0
+release 1
 x 430
 y 375
 w 110
@@ -1334,7 +1334,7 @@ endObjectProperties
 object relatedDisplayClass
 beginObjectProperties
 major 4
-minor 2
+minor 4
 release 0
 x 420
 y 435
@@ -1349,7 +1349,7 @@ buttonLabel "Asyn"
 numPvs 4
 numDsps 1
 displayFileName {
-  0 "aysnRecord.edl"
+  0 "asynRecord.edl"
 }
 symbols {
   0 "P=$(lakeshore340),R=:ASYN"
