@@ -3,10 +3,10 @@ beginScreenProperties
 major 4
 minor 0
 release 1
-x 915
-y 487
+x 310
+y 133
 w 826
-h 467
+h 495
 font "arial-medium-r-18.0"
 ctlFont "arial-medium-r-18.0"
 btnFont "arial-medium-r-18.0"
@@ -398,7 +398,7 @@ major 4
 minor 1
 release 0
 x 725
-y 435
+y 465
 w 95
 h 25
 fgColor index 46
@@ -1235,7 +1235,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 580
+x 680
 y 435
 w 140
 h 25
@@ -1257,7 +1257,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 490
+x 590
 y 435
 w 85
 h 25
@@ -1336,7 +1336,7 @@ beginObjectProperties
 major 4
 minor 4
 release 0
-x 420
+x 520
 y 435
 w 65
 h 25
@@ -1354,5 +1354,25 @@ displayFileName {
 symbols {
   0 "P=$(lakeshore340),R=:ASYN"
 }
+endObjectProperties
+
+# (Menu Button)
+object activeMenuButtonClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 420
+y 435
+w 95
+h 25
+fgColor index 25
+bgColor index 3
+inconsistentColor index 0
+topShadowColor index 1
+botShadowColor index 11
+controlPv "$(lakeshore340):LOOP"
+indicatorPv "$(lakeshore340):LOOP"
+font "arial-bold-r-14.0"
 endObjectProperties
 

@@ -38,7 +38,7 @@ getHTR {
 
 # /// Read the setpoint for control loop 1
 getSETP {
-   out "SETP? \$1";
+   out "SETP? %(\$1:LOOP.RVAL)u";
    in "%f";
 }
 
@@ -62,44 +62,44 @@ getRANGE {
 
 # /// Read the ramp value
 getRAMP {
-   out "RAMP? \$1";
+   out "RAMP? %(\$1:LOOP.RVAL)u";
    in "%*d,%f";
 }
 
 # /// Read the ramp status
 getRAMPSTATUS {
-   out "RAMP? \$1";
+   out "RAMP? %(\$1:LOOP.RVAL)u";
    in "%d,%*f";
 }
 
 # /// Read the control loop 1 manual output value
 getMOUT {
-   out "MOUT? \$1";
+   out "MOUT? %(\$1:LOOP.RVAL)u";
    in "%f";
 }
 
 # /// Read the PID P parameter for control loop 1
 getP {
-   out "PID? \$1";
+   out "PID? %(\$1:LOOP.RVAL)u";
    in "%f,%*f,%*f";
 }
 
 # /// Read the PID I parameter for control loop 1
 getI {
-   out "PID? \$1";
+   out "PID? %(\$1:LOOP.RVAL)u";
    in "%*f,%f,%*f";
 }
 
 # /// Read the PID D parameter for control loop 1
 getD {
-   out "PID? \$1";
+   out "PID? %(\$1:LOOP.RVAL)u";
    in "%*f,%*f,%f";
 }
 
 
 # /// Read the control loop 1 mode
 getCMODE {
-   out "CMODE? \$1";
+   out "CMODE? %(\$1:LOOP.RVAL)u";
    in "%d";
 }
 
@@ -121,7 +121,7 @@ getAOUT {
 
 # /// Set the setpoint for control loop 1
 setSETP {
-   out "SETP \$1,%f";
+   out "SETP %(\$1:LOOP.RVAL)u,%f";
    @init { getSETP; }
 }
 
@@ -134,47 +134,47 @@ setRANGE {
 # /// Set the ramp parameter
 #Need to pass in the PV name for the getRAMPSTATUS protocol.
 setRAMP {
-   out "RAMP \$2,%(\$1.VAL)d,%f";
+   out "RAMP %(\$1:LOOP.RVAL)u,%(\$1:RAMPST.VAL)d,%f";
    @init { getRAMP; }
 }
 
 # /// Set the ramp status
 #Need to pass in the PV name for the getRAMP protocol.
 setRAMPSTATUS {
-   out "RAMP \$2,%d,%(\$1.VAL)f";
+   out "RAMP %(\$1:LOOP.RVAL)u,%d,%(\$1:RAMP.VAL)f";
    @init { getRAMPSTATUS; }
 }
 
 # /// Set the control loop 1 manual output value.
 setMOUT {
-   out "MOUT \$1,%f";
+   out "MOUT %(\$1:LOOP.RVAL)u,%f";
    @init { getMOUT; }
 }
 
 # /// Set the PID P parameter for control loop 1
 #Can just send the first argument for this PID command just just set P
 setP {
-   out "PID \$1,%f";
+   out "PID %(\$1:LOOP.RVAL)u,%f";
    @init { getP; }
 }
 
 # /// Set the PID I parameter for control loop 1
 #Have to also set P as the first argument in the list. I corresponds to the second argument.
 setI {
-   out "PID \$2,%(\$1.VAL)f,%f";
+   out "PID %(\$1:LOOP.RVAL)u,%(\$1:P.VAL)f,%f";
    @init { getI; }
 }
 
 # /// Set the PID D parameter for control loop 1
 #Have to also set the P and I parameters. D corresponds to the third argument.
 setD {
-   out "PID \$3,%(\$1.VAL)f,%(\$2.VAL)f,%f";
-   @init { getD; }   
+   out "PID %(\$1:LOOP.RVAL)u,%(\$1:P.VAL)f,%(\$1:I.VAL)f,%f";
+   @init { getD; }
 }
 
 # /// Set the mode for control loop 1.
 setCMODE {
-   out "CMODE \$1,%d";
-   @init { getCMODE; }   
+   out "CMODE %(\$1:LOOP.RVAL)u,%d";
+   @init { getCMODE; }
 }
 
