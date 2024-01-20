@@ -7,11 +7,14 @@ DIRS := $(DIRS) $(filter-out $(DIRS), $(wildcard *app))
 DIRS := $(DIRS) $(filter-out $(DIRS), $(wildcard iocBoot))
 DIRS := $(DIRS) $(filter-out $(DIRS), $(wildcard iocboot))
 DIRS := $(DIRS) $(filter-out $(DIRS), $(wildcard documentation))
-DIRS := $(DIRS) $(filter-out $(DIRS), $(wildcard etc))
-ifeq ($(wildcard etc),etc)
-	include $(TOP)/etc/makeIocs/Makefile.iocs
-	UNINSTALL_DIRS += documentation/doxygen $(IOC_DIRS)
-endif
+
+# Comment out DLS-specific etc folder
+# -----------------------------------
+# DIRS := $(DIRS) $(filter-out $(DIRS), $(wildcard etc))
+# ifeq ($(wildcard etc),etc)
+# 	include $(TOP)/etc/makeIocs/Makefile.iocs
+# 	UNINSTALL_DIRS += documentation/doxygen $(IOC_DIRS)
+# endif
 
 # Comment out the following line to disable building of example iocs
 #DIRS := $(DIRS) $(filter-out $(DIRS), $(wildcard iocs))
