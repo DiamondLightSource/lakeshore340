@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Saved on 2024-01-21 21:14:40 by root-->
+<display version="2.0.0">
+  <name>lakeshore340 embed</name>
+  <x>571</x>
+  <y>670</y>
+  <width>180</width>
+  <height>20</height>
+  <background_color>
+    <color name="Canvas" red="200" green="200" blue="200">
+    </color>
+  </background_color>
+  <widget type="action_button" version="3.0.0">
+    <name>EDM relatedDisplayClass</name>
+    <actions>
+      <action type="open_display">
+        <file>lakeshore340.bob</file>
+        <macros>
+          <lakeshore340>$(P)$(Q)</lakeshore340>
+        </macros>
+        <target>tab</target>
+      </action>
+    </actions>
+    <text>$(label)</text>
+    <height>20</height>
+    <font>
+      <font family="Liberation Sans" style="BOLD" size="14.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color name="Related display" red="160" green="110" blue="60">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color name="Canvas" red="200" green="200" blue="200">
+      </color>
+    </background_color>
+  </widget>
+  <widget type="bool_button" version="2.0.0">
+    <name>EDM activeButtonClass</name>
+    <pv_name>$(P)$(Q):DISABLE</pv_name>
+    <x>120</x>
+    <width>60</width>
+    <height>20</height>
+    <off_label>Disabled</off_label>
+    <off_color>
+      <color name="Canvas" red="200" green="200" blue="200">
+      </color>
+    </off_color>
+    <on_label>Disabled</on_label>
+    <on_color>
+      <color name="Button: On" red="187" green="187" blue="187">
+      </color>
+    </on_color>
+    <show_led>false</show_led>
+    <font>
+      <font family="Liberation Sans" style="BOLD" size="12.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color name="Controller" red="0" green="0" blue="255">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color name="unknown" red="0" green="0" blue="0">
+      </color>
+    </background_color>
+    <labels_from_pv>true</labels_from_pv>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="group" version="2.0.0">
+    <name>EDM Group 0</name>
+    <x>95</x>
+    <y>-5</y>
+    <width>30</width>
+    <height>30</height>
+    <style>3</style>
+    <transparent>true</transparent>
+    <rules>
+      <rule name="EDM visibility" prop_id="visible" out_exp="false">
+        <exp bool_exp="pv0&gt;=0.0 &amp;&amp; pv0&lt;1.0">
+          <value>true</value>
+        </exp>
+        <exp bool_exp="true">
+          <value>false</value>
+        </exp>
+        <pv_name>$(P)$(Q):DISABLE</pv_name>
+      </rule>
+    </rules>
+    <widget type="embedded" version="2.0.0">
+      <name>EDM activeSymbolClass</name>
+      <file>symbols-traffic-light-symbol.bob</file>
+      <x>5</x>
+      <y>5</y>
+      <width>20</width>
+      <height>20</height>
+      <resize>3</resize>
+      <group_name>EDM Group 0</group_name>
+      <scripts>
+        <script file="EmbeddedPy">
+          <text><![CDATA[# pvs[0] = $(P)$(Q):KRDG0.SEVR
+from org.csstudio.display.builder.runtime.script import PVUtil
+val = PVUtil.getDouble(pvs[0])
+if 3.0 <= val < 4.0:
+    widget.setPropertyValue('group_name', 'EDM Group 0')
+elif 0.0 <= val < 1.0:
+    widget.setPropertyValue('group_name', 'EDM Group 1')
+elif 1.0 <= val < 2.0:
+    widget.setPropertyValue('group_name', 'EDM Group 2')
+elif 2.0 <= val < 3.0:
+    widget.setPropertyValue('group_name', 'EDM Group 3')
+else:
+    widget.setPropertyValue('group_name', 'EDM Group 0')
+]]></text>
+          <pv_name>$(P)$(Q):KRDG0.SEVR</pv_name>
+        </script>
+      </scripts>
+      <tooltip>$(P)$(Q):KRDG0.SEVR</tooltip>
+    </widget>
+  </widget>
+</display>
