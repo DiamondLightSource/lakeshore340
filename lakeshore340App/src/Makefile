@@ -18,6 +18,8 @@ DBD += lakeshore340.dbd
 lakeshore340_DBD += base.dbd
 lakeshore340_DBD += asyn.dbd
 lakeshore340_DBD += drvVxi11.dbd
+lakeshore340_DBD += sCalcoutRecord.dbd
+lakeshore340_DBD += calc.dbd
 lakeshore340_DBD += stream.dbd
 
 #Include files
